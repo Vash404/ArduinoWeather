@@ -1,0 +1,76 @@
+<script src="assets/js/gauge.js"></script>
+<div id="gauge1text"></div>
+<canvas id="gauge1"></canvas>
+<div id="gauge2text"></div>
+<canvas id="gauge2"></canvas>
+<script>
+    var opts = {
+        angle: 0, // The span of the gauge arc
+        lineWidth: 0.16, // The line thickness
+        radiusScale: 1, // Relative radius
+        pointer: {
+            length: 0.52, // // Relative to gauge radius
+            strokeWidth: 0.062, // The thickness
+            color: '#000000' // Fill color
+        },
+        staticLabels: {
+            font: "10px sans-serif",  // Specifies font
+            labels: [100, 130, 150, 220.1, 260, 3000],  // Print labels at these values
+            color: "#000000",  // Optional: Label text color
+            fractionDigits: 0  // Optional: Numerical precision. 0=round off.
+        },
+
+        limitMax: false,     // If false, max value increases automatically if value > maxValue
+        limitMin: false,     // If true, the min value of the gauge will be fixed
+        colorStart: '#6FADCF',   // Colors
+        colorStop: '#8FC0DA',    // just experiment with them
+        strokeColor: '#E0E0E0',  // to see which ones work best for you
+        generateGradient: true,
+        highDpiSupport: true,     // High resolution support
+        
+        
+    };
+    var target = document.getElementById('gauge1'); // your canvas element
+    var gauge1 = new Gauge(target).setOptions(opts); // create sexy gauge!
+    gauge1.maxValue = 3000; // set max gauge value
+    gauge1.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+    gauge1.animationSpeed = 128; // set animation speed (32 is default value)
+    gauge1.set(3000); // set actual value
+    gauge1.setTextField(document.getElementById("gauge1text"));
+</script>
+
+<script>
+    var opts = {
+        angle: 0, // The span of the gauge arc
+        lineWidth: 0.16, // The line thickness
+        radiusScale: 1, // Relative radius
+        pointer: {
+            length: 0.52, // // Relative to gauge radius
+            strokeWidth: 0.062, // The thickness
+            color: '#000000' // Fill color
+        },
+        staticLabels: {
+            font: "10px sans-serif",  // Specifies font
+            labels: [100, 130, 150, 220.1, 260, 3000],  // Print labels at these values
+            color: "#000000",  // Optional: Label text color
+            fractionDigits: 0  // Optional: Numerical precision. 0=round off.
+        },
+
+        limitMax: false,     // If false, max value increases automatically if value > maxValue
+        limitMin: false,     // If true, the min value of the gauge will be fixed
+        colorStart: '#6FADCF',   // Colors
+        colorStop: '#8FC0DA',    // just experiment with them
+        strokeColor: '#E0E0E0',  // to see which ones work best for you
+        generateGradient: true,
+        highDpiSupport: true,     // High resolution support
+        
+        
+    };
+    var target = document.getElementById('gauge2'); // your canvas element
+    var gauge2 = new Gauge(target).setOptions(opts); // create sexy gauge!
+    gauge2.maxValue = 3000; // set max gauge value
+    gauge2.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+    gauge2.animationSpeed = 128; // set animation speed (32 is default value)
+    gauge2.set(3000); // set actual value
+    gauge2.setTextField(document.getElementById("gauge2text"));
+</script>

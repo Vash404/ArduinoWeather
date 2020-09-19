@@ -1,1091 +1,392 @@
 <!DOCTYPE html>
 <html>
-    <head>
-<meta charset="UTF-8">       
-<title>MYHOME6</title>
-        <body bgcolor= 	#7a8b9d  >
-
-    <script>
-		
-		str_RESET = "";
-		str_BUZZER_OFF = "";
-		str_OUT_1 = "";
-		str_OUT_2 = "";
-		
-		var RESET_state = 0;
-		var BUZZER_OFF_state = 0;
-		var OUT_1_state = 0;
-		var OUT_2_state = 0;
-		var OUT_3_state = 0;
-		var OUT_4_state = 0;
-		var P = 104000;	
-		var t1 = 35;
-		var h1 = 100;
-		var t2 = 40;
-		var h2 = 100;
-		var ppmCO2_b = 50;
-		var realPower = 3000;
-		var supplyVoltage = 250;
-    var wind_speed = 50;
-    var aqspercent = 50;
-    var rain_fall = 50;
-		
-		
-//Gauge Code Starts
-var Gauge=function(b){function l(a,b){for(var c in b)"object"==typeof b[c]&&"[object Array]"!==Object.prototype.toString.call(b[c])&&"renderTo"!=c?("object"!=typeof a[c]&&(a[c]={}),l(a[c],b[c])):a[c]=b[c]}function q(){z.width=b.width;z.height=b.height;A=z.cloneNode(!0);B=A.getContext("2d");C=z.width;D=z.height;t=C/2;u=D/2;f=t<u?t:u;A.i8d=!1;B.translate(t,u);B.save();a.translate(t,u);a.save()}function v(a){var b=new Date;G=setInterval(function(){var c=(new Date-b)/a.duration;1<c&&(c=1);var f=("function"==
-typeof a.delta?a.delta:M[a.delta])(c);a.step(f);1==c&&clearInterval(G)},a.delay||10)}function k(){G&&clearInterval(G);var a=I-n,h=n,c=b.animation;v({delay:c.delay,duration:c.duration,delta:c.fn,step:function(b){n=parseFloat(h)+a*b;E.draw()}})}function e(a){return a*Math.PI/180}function g(b,h,c){c=a.createLinearGradient(0,0,0,c);c.addColorStop(0,b);c.addColorStop(1,h);return c}function p(){var m=93*(f/100),h=f-m,c=91*(f/100),e=88*(f/100),d=85*(f/100);a.save();b.glow&&(a.shadowBlur=h,a.shadowColor=
-"rgba(0, 0, 0, 0.5)");a.beginPath();a.arc(0,0,m,0,2*Math.PI,!0);a.fillStyle=g("#ddd","#aaa",m);a.fill();a.restore();a.beginPath();a.arc(0,0,c,0,2*Math.PI,!0);a.fillStyle=g("#fafafa","#ccc",c);a.fill();a.beginPath();a.arc(0,0,e,0,2*Math.PI,!0);a.fillStyle=g("#eee","#f0f0f0",e);a.fill();a.beginPath();a.arc(0,0,d,0,2*Math.PI,!0);a.fillStyle=b.colors.plate;a.fill();a.save()}function w(a){var h=!1;a=0===b.majorTicksFormat.dec?Math.round(a).toString():a.toFixed(b.majorTicksFormat.dec);return 1<b.majorTicksFormat["int"]?
-(h=-1<a.indexOf("."),-1<a.indexOf("-")?"-"+(b.majorTicksFormat["int"]+b.majorTicksFormat.dec+2+(h?1:0)-a.length)+a.replace("-",""):""+(b.majorTicksFormat["int"]+b.majorTicksFormat.dec+1+(h?1:0)-a.length)+a):a}function d(){var m=81*(f/100);a.lineWidth=2;a.strokeStyle=b.colors.majorTicks;a.save();if(0===b.majorTicks.length){for(var h=(b.maxValue-b.minValue)/5,c=0;5>c;c++)b.majorTicks.push(w(b.minValue+h*c));b.majorTicks.push(w(b.maxValue))}for(c=0;c<b.majorTicks.length;++c)a.rotate(e(45+c*(270/(b.majorTicks.length-
-1)))),a.beginPath(),a.moveTo(0,m),a.lineTo(0,m-15*(f/100)),a.stroke(),a.restore(),a.save();b.strokeTicks&&(a.rotate(e(90)),a.beginPath(),a.arc(0,0,m,e(45),e(315),!1),a.stroke(),a.restore(),a.save())}function J(){var m=81*(f/100);a.lineWidth=1;a.strokeStyle=b.colors.minorTicks;a.save();for(var h=b.minorTicks*(b.majorTicks.length-1),c=0;c<h;++c)a.rotate(e(45+c*(270/h))),a.beginPath(),a.moveTo(0,m),a.lineTo(0,m-7.5*(f/100)),a.stroke(),a.restore(),a.save()}function s(){for(var m=55*(f/100),h=0;h<b.majorTicks.length;++h){var c=
-F(m,e(45+h*(270/(b.majorTicks.length-1))));a.font=20*(f/200)+"px Arial";a.fillStyle=b.colors.numbers;a.lineWidth=0;a.textAlign="center";a.fillText(b.majorTicks[h],c.x,c.y+3)}}function x(a){var h=b.valueFormat.dec,c=b.valueFormat["int"];a=parseFloat(a);var f=0>a;a=Math.abs(a);if(0<h){a=a.toFixed(h).toString().split(".");h=0;for(c-=a[0].length;h<c;++h)a[0]="0"+a[0];a=(f?"-":"")+a[0]+"."+a[1]}else{a=Math.round(a).toString();h=0;for(c-=a.length;h<c;++h)a="0"+a;a=(f?"-":"")+a}return a}function F(a,b){var c=
-Math.sin(b),f=Math.cos(b);return{x:0*f-a*c,y:0*c+a*f}}function N(){a.save();for(var m=81*(f/100),h=m-15*(f/100),c=0,g=b.highlights.length;c<g;c++){var d=b.highlights[c],r=(b.maxValue-b.minValue)/270,k=e(45+(d.from-b.minValue)/r),r=e(45+(d.to-b.minValue)/r);a.beginPath();a.rotate(e(90));a.arc(0,0,m,k,r,!1);a.restore();a.save();var l=F(h,k),p=F(m,k);a.moveTo(l.x,l.y);a.lineTo(p.x,p.y);var p=F(m,r),n=F(h,r);a.lineTo(p.x,p.y);a.lineTo(n.x,n.y);a.lineTo(l.x,l.y);a.closePath();a.fillStyle=d.color;a.fill();
-a.beginPath();a.rotate(e(90));a.arc(0,0,h,k-0.2,r+0.2,!1);a.restore();a.closePath();a.fillStyle=b.colors.plate;a.fill();a.save()}}function K(){var m=12*(f/100),h=8*(f/100),c=77*(f/100),d=20*(f/100),k=4*(f/100),r=2*(f/100),l=function(){a.shadowOffsetX=2;a.shadowOffsetY=2;a.shadowBlur=10;a.shadowColor="rgba(188, 143, 143, 0.45)"};l();a.save();n=0>n?Math.abs(b.minValue-n):0<b.minValue?n-b.minValue:Math.abs(b.minValue)+n;a.rotate(e(45+n/((b.maxValue-b.minValue)/270)));a.beginPath();a.moveTo(-r,-d);a.lineTo(-k,
-0);a.lineTo(-1,c);a.lineTo(1,c);a.lineTo(k,0);a.lineTo(r,-d);a.closePath();a.fillStyle=g(b.colors.needle.start,b.colors.needle.end,c-d);a.fill();a.beginPath();a.lineTo(-0.5,c);a.lineTo(-1,c);a.lineTo(-k,0);a.lineTo(-r,-d);a.lineTo(r/2-2,-d);a.closePath();a.fillStyle="rgba(255, 255, 255, 0.2)";a.fill();a.restore();l();a.beginPath();a.arc(0,0,m,0,2*Math.PI,!0);a.fillStyle=g("#ffffff","#ffffff",m);a.fill();a.restore();a.beginPath();a.arc(0,0,h,0,2*Math.PI,!0);a.fillStyle=g("#e8e8e8","#f5f5f5",h);a.fill()}
-function L(){a.save();a.font=40*(f/200)+"px Arial";var b=x(y),h=a.measureText("-"+x(0)).width,c=f-33*(f/100),g=0.12*f;a.save();var d=-h/2-0.025*f,e=c-g-0.04*f,h=h+0.05*f,g=g+0.07*f,k=0.025*f;a.beginPath();a.moveTo(d+k,e);a.lineTo(d+h-k,e);a.quadraticCurveTo(d+h,e,d+h,e+k);a.lineTo(d+h,e+g-k);a.quadraticCurveTo(d+h,e+g,d+h-k,e+g);a.lineTo(d+k,e+g);a.quadraticCurveTo(d,e+g,d,e+g-k);a.lineTo(d,e+k);a.quadraticCurveTo(d,e,d+k,e);a.closePath();d=a.createRadialGradient(0,c-0.12*f-0.025*f+(0.12*f+0.045*f)/
-2,f/10,0,c-0.12*f-0.025*f+(0.12*f+0.045*f)/2,f/5);d.addColorStop(0,"#ffffff");d.addColorStop(1,"#ffffff");a.strokeStyle=d;a.lineWidth=0.05*f;a.stroke();a.shadowBlur=0.012*f;a.shadowColor="rgba(0, 0, 0, 1)";a.fillStyle="#ffffff";a.fill();a.restore();a.shadowOffsetX=0.004*f;a.shadowOffsetY=0.004*f;a.shadowBlur=0.012*f;a.shadowColor="rgba(0, 0, 0, 0)";a.fillStyle="#444";a.textAlign="center";a.fillText(b,-0,c);a.restore()}Gauge.Collection.push(this);this.config={renderTo:null,width:200,height:200,title:!1,
-maxValue:100,minValue:0,majorTicks:[],minorTicks:10,strokeTicks:!5,units:!5,valueFormat:{"int":3,dec:1},majorTicksFormat:{"int":5,dec:0},glow:!0,animation:{delay:10,duration:250,fn:"cycle"},colors:{plate:"#fff",majorTicks:"#444",minorTicks:"#666",title:"#888",units:"#888",numbers:"#444",needle:{start:"rgba(240, 128, 128, 1)",end:"rgba(255, 160, 122, .9)"}},highlights:[{from:20,to:60,color:"#eee"},{from:60,to:80,color:"#ccc"},{from:80,to:100,color:"#999"}]};var y=0,E=this,n=0,I=0,H=!1;this.setValue=
-function(a){n=b.animation?y:a;var d=(b.maxValue-b.minValue)/100;I=a>b.maxValue?b.maxValue+d:a<b.minValue?b.minValue-d:a;y=a;b.animation?k():this.draw();return this};this.setRawValue=function(a){n=y=a;this.draw();return this};this.clear=function(){y=n=I=this.config.minValue;this.draw();return this};this.getValue=function(){return y};this.onready=function(){};l(this.config,b);this.config.minValue=parseFloat(this.config.minValue);this.config.maxValue=parseFloat(this.config.maxValue);b=this.config;n=
-y=b.minValue;if(!b.renderTo)throw Error("Canvas element was not specified when creating the Gauge object!");var z=b.renderTo.tagName?b.renderTo:document.getElementById(b.renderTo),a=z.getContext("2d"),A,C,D,t,u,f,B;q();this.updateConfig=function(a){l(this.config,a);q();this.draw();return this};var M={linear:function(a){return a},quad:function(a){return Math.pow(a,2)},quint:function(a){return Math.pow(a,5)},cycle:function(a){return 1-Math.sin(Math.acos(a))},bounce:function(a){a:{a=1-a;for(var b=0,
-c=1;;b+=c,c/=2)if(a>=(7-4*b)/11){a=-Math.pow((11-6*b-11*a)/4,2)+Math.pow(c,2);break a}a=void 0}return 1-a},elastic:function(a){a=1-a;return 1-Math.pow(2,10*(a-1))*Math.cos(30*Math.PI/3*a)}},G=null;a.lineCap="round";this.draw=function(){if(!A.i8d){B.clearRect(-t,-u,C,D);B.save();var g={ctx:a};a=B;p();N();J();d();s();b.title&&(a.save(),a.font=24*(f/200)+"px Arial",a.fillStyle=b.colors.title,a.textAlign="center",a.fillText(b.title,0,-f/4.25),a.restore());b.units&&(a.save(),a.font=30*(f/200)+"px Arial",
-a.fillStyle=b.colors.units,a.textAlign="center",a.fillText(b.units,0,f/3.25),a.restore());A.i8d=!0;a=g.ctx;delete g.ctx}a.clearRect(-t,-u,C,D);a.save();a.drawImage(A,-t,-u,C,D);if(Gauge.initialized)L(),K(),H||(E.onready&&E.onready(),H=!0);else var e=setInterval(function(){Gauge.initialized&&(clearInterval(e),L(),K(),H||(E.onready&&E.onready(),H=!0))},10);return this}};Gauge.initialized=!1;
-(function(){var b=document,l=b.getElementsByTagName("head")[0],q=-1!=navigator.userAgent.toLocaleLowerCase().indexOf("msie"),v="@font-face {font-family: 'Arial';src: url('fonts/digital-7-mono."+(q?"eot":"ttf")+"');}",k=b.createElement("style");k.type="text/css";if(q)l.appendChild(k),l=k.styleSheet,l.cssText=v;else{try{k.appendChild(b.createTextNode(v))}catch(e){k.cssText=v}l.appendChild(k);l=k.styleSheet?k.styleSheet:k.sheet||b.styleSheets[b.styleSheets.length-1]}var g=setInterval(function(){if(b.body){clearInterval(g);
-var e=b.createElement("div");e.style.fontFamily="Arial";e.style.position="absolute";e.style.height=e.style.width=0;e.style.overflow="hidden";e.innerHTML=".";b.body.appendChild(e);setTimeout(function(){Gauge.initialized=!0;e.parentNode.removeChild(e)},250)}},1)})();Gauge.Collection=[];
-Gauge.Collection.get=function(b){if("string"==typeof b)for(var l=0,q=this.length;l<q;l++){if((this[l].config.renderTo.tagName?this[l].config.renderTo:document.getElementById(this[l].config.renderTo)).getAttribute("id")==b)return this[l]}else return"number"==typeof b?this[b]:null};function domReady(b){window.addEventListener?window.addEventListener("DOMContentLoaded",b,!1):window.attachEvent("onload",b)}
-domReady(function(){function b(b){for(var e=b[0],d=1,g=b.length;d<g;d++)e+=b[d].substr(0,1).toUpperCase()+b[d].substr(1,b[d].length-1);return e}for(var l=document.getElementsByTagName("canvas"),q=0,v=l.length;q<v;q++)if("canv-gauge"==l[q].getAttribute("data-type")){var k=l[q],e={},g,p=parseInt(k.getAttribute("width"),10),w=parseInt(k.getAttribute("height"),10);e.renderTo=k;p&&(e.width=p);w&&(e.height=w);p=0;for(w=k.attributes.length;p<w;p++)if(g=k.attributes.item(p).nodeName,"data-type"!=g&&"data-"==
-g.substr(0,5)){var d=g.substr(5,g.length-5).toLowerCase().split("-");if(g=k.getAttribute(g))switch(d[0]){case "colors":d[1]&&(e.colors||(e.colors={}),"needle"==d[1]?(d=g.split(/\s+/),e.colors.needle=d[0]&&d[1]?{start:d[0],end:d[1]}:g):(d.shift(),e.colors[b(d)]=g));break;case "highlights":e.highlights||(e.highlights=[]);g=g.match(/(?:(?:-?\d*\.)?(-?\d+){1,2} ){2}(?:(?:#|0x)?(?:[0-9A-F|a-f]){3,8}|rgba?\(.*?\))/g);for(var d=0,J=g.length;d<J;d++){var s=g[d].replace(/^\s+|\s+$/g,"").split(/\s+/),x={};
-s[0]&&""!=s[0]&&(x.from=s[0]);s[1]&&""!=s[1]&&(x.to=s[1]);s[2]&&""!=s[2]&&(x.color=s[2]);e.highlights.push(x)}break;case "animation":d[1]&&(e.animation||(e.animation={}),"fn"==d[1]&&/^\s*function\s*\(/.test(g)&&(g=eval("("+g+")")),e.animation[d[1]]=g);break;default:d=b(d);if("onready"==d)continue;if("majorTicks"==d)g=g.split(/\s+/);else if("strokeTicks"==d||"glow"==d)g="true"==g?!0:!1;else if("valueFormat"==d)if(g=g.split("."),2==g.length)g={"int":parseInt(g[0],10),dec:parseInt(g[1],10)};else continue;
-e[d]=g}}e=new Gauge(e);k.getAttribute("data-value")&&e.setRawValue(parseFloat(k.getAttribute("data-value")));k.getAttribute("data-onready")&&(e.onready=function(){eval(this.config.renderTo.getAttribute("data-onready"))});e.draw()}});window.Gauge=Gauge;
-//Gauge Code Ends	
-
-
-								
-		function GetArduinoIO()
-		{
-			
-		nocache = "&nocache=" + Math.random() * 1000000;
-			var request = new XMLHttpRequest();
-			request.onreadystatechange = function()
-			{
-				if (this.readyState == 4) {
-					if (this.status == 200) {
-						if (this.responseXML != null) {
-							
-							// XML file received
-						
-							// get pushbutton state
-							
-							if (this.responseXML.getElementsByTagName('button')[0].childNodes[0].nodeValue === "on") {
-								document.getElementById("RESET").innerHTML = "<div style='width:40px;height:13px;border-radius:2px;background:#f33;'></div>"+"CLEAR/LOCK &#9650&#9660: ON";
-								RESET_state = 1;
-							}
-							else {
-								document.getElementById("RESET").innerHTML = "<div style='width:40px;height:13px;border-radius:2px;background:#00cc00;'></div>"+"CLEAR/LOCK &#9650&#9660: OFF";
-								RESET_state = 0;
-							}   														
-													
-							if (this.responseXML.getElementsByTagName('button')[1].childNodes[0].nodeValue === "on") {
-								document.getElementById("BUZZER_OFF").innerHTML = "<div style='width:40px;height:13px;border-radius:2px;background:#f33;'></div>"+"MUTE ALARM: ON";
-								BUZZER_OFF_state = 1;
-							}
-							else {
-								document.getElementById("BUZZER_OFF").innerHTML = "<div style='width:40px;height:13px;border-radius:2px;background:#00cc00;'></div>"+"MUTE ALARM: OFF";
-								BUZZER_OFF_state = 0;
-							}   				
-            
-							if (this.responseXML.getElementsByTagName('button')[2].childNodes[0].nodeValue === "on") {
-								document.getElementById("OUT_1").innerHTML = "<div style='width:40px;height:13px;border-radius:2px;background:#f33;'></div>"+"SET OUT 1: ON";
-								OUT_1_state = 1;
-							}
-							else {
-								document.getElementById("OUT_1").innerHTML = "<div style='width:40px;height:13px;border-radius:2px;background:#00cc00;'></div>"+"SET OUT 1: OFF";
-								OUT_1_state = 0;
-							}   				
-						
-							if (this.responseXML.getElementsByTagName('button')[3].childNodes[0].nodeValue === "on") {
-								document.getElementById("OUT_2").innerHTML = "<div style='width:40px;height:13px;border-radius:2px;background:#f33;'></div>"+"SET OUT 2: ON";
-								OUT_2_state = 1;
-							}
-							else {
-								document.getElementById("OUT_2").innerHTML = "<div style='width:40px;height:13px;border-radius:2px;background:#00cc00;'></div>"+"SET OUT 2: OFF";
-								OUT_2_state = 0;
-							}   				
-							
-							// get digital outputs state
-							
-							if (this.responseXML.getElementsByTagName('digital_outputs')[0].childNodes[0].nodeValue === "on") {
-								document.getElementById("OUT_3").innerHTML = "<div style='width:20px;height:20px;border-radius:20px;background:#f33; float:left; margin-left:75px;margin-right:5px;'></div><div style='width:20px;float:left;'>YES</div>";
-								OUT_3_state = 1;
-							}
-							else {
-								document.getElementById("OUT_3").innerHTML = "<div style='width:20px;height:20px;border-radius:20px;background:#00cc00; float:left; margin-left:75px;margin-right:5px;'></div><div style='width:20px;float:left;'>NO</div>";
-								OUT_3_state  = 0;
-							}   				
-							
-							if (this.responseXML.getElementsByTagName('digital_outputs')[1].childNodes[0].nodeValue === "on") {
-								document.getElementById("OUT_4").innerHTML = "<div style='width:20px;height:20px;border-radius:20px;background:#f33; float:center;margin-left:70px;'></div>";
-								OUT_4_state = 1;
-							}
-							else {
-								document.getElementById("OUT_4").innerHTML = "<div style='width:20px;height:20px;border-radius:20px;background:#00cc00; float:center;margin-left:70px;'></div>";
-								OUT_4_state  = 0;
-							}   				
-						
-							// get RTC time & time server
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('time').length;
-							for (count = 0; count < num_an; count++) {
-								document.getElementsByClassName("time")[count].innerHTML =
-									this.responseXML.getElementsByTagName('time')[count].childNodes[0].nodeValue;
-							}
-							
-							// get bmp sensor temperature and alarm
-								var count;
-								var num_an = this.responseXML.getElementsByTagName('bmp_temp').length;
-								for (count = 0; count < num_an; count++) {
-									document.getElementsByClassName("bmp_temp")[count].innerHTML =
-										this.responseXML.getElementsByTagName('bmp_temp')[count].childNodes[0].nodeValue;
-								}														
-						  
-							//get data for gauge
-							
-							P  = this.responseXML.getElementsByTagName('gauge')[0].childNodes[0].nodeValue;
-							t1 = this.responseXML.getElementsByTagName('gauge')[1].childNodes[0].nodeValue;
-							h1 = this.responseXML.getElementsByTagName('gauge')[2].childNodes[0].nodeValue;
-							t2 = this.responseXML.getElementsByTagName('gauge')[3].childNodes[0].nodeValue;
-							h2 = this.responseXML.getElementsByTagName('gauge')[4].childNodes[0].nodeValue;
-							realPower = this.responseXML.getElementsByTagName('gauge')[5].childNodes[0].nodeValue;
-							
-							
-							// get wind speed data
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('wind_speed_data').length;
-							for (count = 0; count < num_an; count++) {
-								document.getElementsByClassName("wind_speed_data")[count].innerHTML =
-									this.responseXML.getElementsByTagName('wind_speed_data')[count].childNodes[0].nodeValue;
-							   wind_speed = this.responseXML.getElementsByTagName('wind_speed_data')[0].childNodes[0].nodeValue
-						  }
-							
-							// get rain data
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('rain_data').length;
-							for (count = 0; count < num_an; count++) {
-								document.getElementsByClassName("rain_data")[count].innerHTML =
-									this.responseXML.getElementsByTagName('rain_data')[count].childNodes[0].nodeValue;
-							    rain_fall = this.responseXML.getElementsByTagName('rain_data')[0].childNodes[0].nodeValue;
-						  
-						  }
-							                                      
-							// get barometric pressure delta value 
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('Delta_P').length;
-							for (count = 0; count < num_an; count++) {
-								document.getElementsByClassName("Delta_P")[count].innerHTML =
-									this.responseXML.getElementsByTagName('Delta_P')[count].childNodes[0].nodeValue;
-							}
-													
-							// get barometric pressure state
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('Delta_P_state').length;
-							for (count = 0; count < num_an; count++) {
-							
-							if (this.responseXML.getElementsByTagName('Delta_P_state')[count].childNodes[0].nodeValue == "DeltaP1_good"){
-        document.getElementsByClassName("Delta_P_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#00cc00;margin:0 auto;'></div>";
-								} 
-							
-							else if (this.responseXML.getElementsByTagName('Delta_P_state')[count].childNodes[0].nodeValue == "DeltaP1_stable") {
-				document.getElementsByClassName("Delta_P_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#ffffff;margin:0 auto;'></div>";
-							
-                }
-							
-							else if (this.responseXML.getElementsByTagName('Delta_P_state')[count].childNodes[0].nodeValue == "DeltaP1_alarm") {
-				document.getElementsByClassName("Delta_P_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#f33;margin:0 auto;'></div>";
-							
-                }
-							
-							if (this.responseXML.getElementsByTagName('Delta_P_state')[count].childNodes[0].nodeValue == "DeltaP2_good"){
-        document.getElementsByClassName("Delta_P_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#00cc00;margin:0 auto;'></div>";
-								} 
-							
-							else if (this.responseXML.getElementsByTagName('Delta_P_state')[count].childNodes[0].nodeValue == "DeltaP2_stable") {
-				document.getElementsByClassName("Delta_P_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#ffffff;margin:0 auto;'></div>";
-							
-                }
-							else if (this.responseXML.getElementsByTagName('Delta_P_state')[count].childNodes[0].nodeValue == "DeltaP2_alarm") {
-				document.getElementsByClassName("Delta_P_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#f33;margin:0 auto;'></div>";
-							
-                }
-			
-							if (this.responseXML.getElementsByTagName('Delta_P_state')[count].childNodes[0].nodeValue == "DeltaP3_good"){
-        document.getElementsByClassName("Delta_P_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#00cc00;margin:0 auto;'></div>";
-								} 
-							
-							else if (this.responseXML.getElementsByTagName('Delta_P_state')[count].childNodes[0].nodeValue == "DeltaP3_stable") {
-				document.getElementsByClassName("Delta_P_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#ffffff;margin:0 auto;'></div>";
-							}
-              
-              else if (this.responseXML.getElementsByTagName('Delta_P_state')[count].childNodes[0].nodeValue == "DeltaP3_alarm") {
-				document.getElementsByClassName("Delta_P_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#f33;margin:0 auto;'></div>";
-							
-              }
-			}																	
-							
-							
-							// get heat index state
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('HI_state').length;
-							for (count = 0; count < num_an; count++) {
-							
-							if (this.responseXML.getElementsByTagName('HI_state')[count].childNodes[0].nodeValue == "A"){
-        document.getElementsByClassName("HI_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#f33;margin:0 auto;'></div>";
-								} 
-							
-							else if (this.responseXML.getElementsByTagName('HI_state')[count].childNodes[0].nodeValue == "B"){
-        document.getElementsByClassName("HI_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#fd6012;margin:0 auto;'></div>";
-								} 
-							
-							
-							else if (this.responseXML.getElementsByTagName('HI_state')[count].childNodes[0].nodeValue == "C"){
-        document.getElementsByClassName("HI_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#ffac33;margin:0 auto;'></div>";
-								} 
-							
-							
-							else if (this.responseXML.getElementsByTagName('HI_state')[count].childNodes[0].nodeValue == "D"){
-        document.getElementsByClassName("HI_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#ffff33;margin:0 auto;'></div>";
-								} 
-							
-							else if (this.responseXML.getElementsByTagName('HI_state')[count].childNodes[0].nodeValue == "E"){
-        document.getElementsByClassName("HI_state")[count].innerHTML = "<div style='width:15px;height:15px;border-radius:15px;background:#00cc00;margin:0 auto;'></div>";
-								} 
-			}
-
-	
-	
-					// get temperature and humidity data
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('T_H_data').length;
-							for (count = 0; count < num_an; count++) {
-								document.getElementsByClassName("T_H_data")[count].innerHTML =
-									this.responseXML.getElementsByTagName('T_H_data')[count].childNodes[0].nodeValue;
-							}
-																				
-							
-							// get air quality sensor value
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('aqs_data').length;
-							for (count = 0; count < num_an; count++) {
-								document.getElementsByClassName("aqs_data")[count].innerHTML =
-									this.responseXML.getElementsByTagName('aqs_data')[count].childNodes[0].nodeValue;
-							if (count == 0){
-									aqspercent = this.responseXML.getElementsByTagName('aqs_data')[count].childNodes[0].nodeValue;
-								} 
-							}
-											
-		 					// get CO2 concentration current value, max/min value, and alarm
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('CO2_data').length;
-							for (count = 0; count < num_an; count++) {
-								document.getElementsByClassName("CO2_data")[count].innerHTML =
-									this.responseXML.getElementsByTagName('CO2_data')[count].childNodes[0].nodeValue;	 
-							}
-
-							// get CO2 concentration for graphic bar
-							ppmCO2_b = this.responseXML.getElementsByTagName('CO2_data')[0].childNodes[0].nodeValue/20;							 
-	
-              
-							//get data for Energy monitor value
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('energy_monitor').length;
-							for (count = 0; count < num_an; count++) {
-								document.getElementsByClassName("energy_monitor")[count].innerHTML =
-									this.responseXML.getElementsByTagName('energy_monitor')[count].childNodes[0].nodeValue;
-							}
-							
-							// get Energy monitor max/min value and alarm
-							
-							var count;
-							var num_an = this.responseXML.getElementsByTagName('energy_monitor_max_min_data').length;
-							for (count = 0; count < num_an; count++) {
-								document.getElementsByClassName("energy_monitor_max_min_data")[count].innerHTML =
-									this.responseXML.getElementsByTagName('energy_monitor_max_min_data')[count].childNodes[0].nodeValue;
-							}
-						}
-					}
-				}
-			}
-		
-			// send HTTP GET request
-			
-			request.open("GET", "ajax_inputs" + str_RESET + str_BUZZER_OFF + str_OUT_1 + str_OUT_2 + nocache, true);
-			request.send(null);
-			setTimeout('GetArduinoIO()', 5000);
-      str_RESET = "";
-      str_BUZZER_OFF = "";
-      str_OUT1 = "";
-      str_OUT2 = "";
-      str_OUT3 = "";
-		}
-		
-		function GetButtonReset()
-		{
-			if (RESET_state === 1) {
-				RESET_state = 0;
-				str_RESET = "&RESET=0";
-				
-			}
-			else {
-				RESET_state = 1;
-				str_RESET = "&RESET=1";
-			}
-		}
-		
-		function GetButtonTacitate()
-		{
-			if (BUZZER_OFF_state === 1) {
-				BUZZER_OFF_state = 0;
-				str_BUZZER_OFF = "&BUZZER_OFF=0";
-				
-			}
-			else {
-				BUZZER_OFF_state = 1;
-				str_BUZZER_OFF = "&BUZZER_OFF=1";
-			}
-		}
-		
-		function GetButtonOUT1()
-		{
-			if (OUT_1_state === 1) {
-				OUT_1_state = 0;
-				str_OUT_1 = "&OUT_1=0";
-				
-			}
-			else {
-				OUT_1_state = 1;
-				str_OUT_1 = "&OUT_1=1";
-			}
-		}
-
-		function GetButtonOUT2()
-		{
-			if (OUT_2_state === 1) {
-				OUT_2_state = 0;
-				str_OUT_2 = "&OUT_2=0";
-				
-			}
-			else {
-				OUT_2_state = 1;
-				str_OUT_2 = "&OUT_2=1";
-			}
-		}
-	
-	
-		</script>
-	<style>
-	
-	.A_box {
-			float: left;
-			width: 210px;
-			height: 600px;
-			text-align:center;
-			margin: 2px 0px 2px 2px;
-     		}
-    
-    .B_box {
-			float: left;
-			margin: 2px 2px 2px 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 180px;
-			height: 65px;
-			text-align:center;
-			border: 1px solid white;
-			line-height: 10px;
-			font-size: 95%;
-			}
-	        
-    .C_box {
-			float: left;
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 198px;
-			height: 239px;
-			text-align:center;
-			line-height: 12px;
-			}
-   
-	.C1_box {
-			float: left;
-			margin: 4px 0px 2px 4px;
-			border: 3px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 424px;
-			height: 586px;
-			text-align:left;
-			}    
-
-	.D_box {
-			float: left;
-			width: 208px;
-			height: 630px;
-			margin: 2px 0px 2px 2px;
-			font-size: 95%;
-			}
-    
-	.E_box {
-			float: left;
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 200px;
-			height: 250px;
-			text-align:center;
-			font-size: 95%;
-			line-height: 10px;
-			}
-      
-     .F_box {
-			float: left;
-			margin: 2px;
-			width: 170px;
-			height: 595px;
-			margin: 2px 2px 2px 2px;
-			}
-      
-     .G_box {
-			float: left;
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 200px;
-			height: 275px;
-			text-align:center;
-			line-height: 10px;
-			}
- 
-     .H_box {
-			float: left;
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 198px;
-			height: 100px;
-			text-align:center;
-			line-height: 12px;
-			}	
-      
-     .I_box {
-			float: left;
-			margin: 2px 2Px 2px 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 160px;
-			height: 45px;
-			text-align:center;
-			border: 1px solid white;
-			line-height: 20px;
-			}
-   	    
-     .M_box {
-			float: left;
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 200px;
-			height: 210px;
-			text-align:center;
-			line-height: 12px;
-			}  
-    
-     .N_box {
-			float: left;
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 200px;
-			text-align:center;
-			line-height: 12px;
-			font-size: 95%;
-			}
-     
-     .O_box {
-			float: left;
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 180px;
-			height: 255px;
-			text-align:center;
-			line-height: 15px;
-			}  
-     
-    .P_box {
-			float: left;
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			padding: 2px;
-			width: 200px;
-			height: 170px;
-			text-align:center;
-			line-height: 15px;
-			}  
-         
-    .Q_box {
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			width: 192px;
-			height: 17px;
-			}
-     
-    .R_box {
-			margin: 2px;
-			border: 1px solid white;
-			border-radius: 2px;
-			width: 192px;
-			height: 17px;
-			}
-     
-    .S_box {
-			margin: 2px 2px 2px 2px
-			border: 2px solid white;
-			border-radius: 2px;
-			width: 800px;
-			height: 200px;
-			}
-            
-   .button {
-			border-radius: 2px;
-			background-color: #5c6976;
-			border: 1px;
-			color: #FFFFFF;
-			text-align: center;
-			font face: Calibri;	
-			font-size: 12px;
-			padding: 2px;
-			width: 155px;
-			height: 60px
-			margin: 2px;
-			cursor: pointer;
-			}
-    
-		
-		h1 {
-			font-size: 90%;
-			margin: 1Px;
-			}
-		
-		h2 {
-			font-size:110%;
-			margin: 1Px;
-			}
-		
-		h3 {
-			font-size: 130%;
-			margin: 1Px;
-			}		
-    
-     #myProgress {
-      border-radius: 2px;
-      width: 100%;
-      background-color: #5c6976;
-	}
-   
-     #myBar {
-      width: 1%;
-      height: 15px;
-      border-radius: 2px;
-      background-color: #0BB950;
-	}
-
-     #myProgress2 {
-      border-radius: 2px;
-      width: 100%;
-      background-color: #5c6976;
-	}
-   
-     #myBar2 {
-      width: 1%;
-      height: 15px;
-      border-radius: 2px;
-      background-color: #4D89F2;
-    }
-
-     #myProgress3 {
-      border-radius: 2px;
-      width: 100%;
-      background-color: #5c6976;
-    }
-   
-     #myBar3 {
-      width: 1%;
-      height: 15px;
-      border-radius: 2px;
-      background-color: #CC5;
-    }
-
-      #myProgress4 {
-      border-radius: 2px;
-      width: 100%;
-      background-color: #5c6976;
-    }
-   
-     #myBar4 {
-      width: 1%;
-      height: 15px;
-      border-radius: 2px;
-      background-color: #4D89F2;
-    }
-
-    </style>
-      </head>
-   
-       <body onload="GetArduinoIO()">
-       <font face="Calibri" color="#FFFFFF"> 
-       
-       
-       <div style="width:80%; float:left;"><h2>MYHOME6</h2></div>
-       <div style="width:20%; float:left;"><h2><span class="time">...</span></h2></div>
-       
-       </div>
+   <head>
+      <meta charset="UTF-8">
+      <title>MYHOME6</title>
+      <link rel="stylesheet" href="assets/css/main.css">
+      <script src="assets/js/gauge.js"></script>
+   </head>
+   <body onload="GetArduinoIO()">
+      <font face="Calibri" color="#FFFFFF">
+      <div style="width:80%; float:left;">
+         <h2>MYHOME6</h2>
+      </div>
+      <div style="width:20%; float:left;">
+         <h2><span class="time">...</span></h2>
+      </div>
+      </div>
       <div class="C1_box">
-       <div class="A_box">
-       <div class="G_box">
-       <div style="margin-top:3px;"><h1>BAROMETRIC PRESSURE</h1></div>
-    
-       
-       <canvas id="gauge_1" 
-       data-units="Hpa" 
-       width="160" 
-       height="160" 
-       data-major-ticks="970 980 990 1000 1010 1020 1030 1040" 
-       data-highlights="970 990 #92959b, 990 1010 #8da9d6, 1010 1040 #588fe8"
-       data-type="canv-gauge" 
-       data-min-value="970" 
-       data-max-value="1040" 
-       data-onready="setInterval( function() { Gauge.Collection.get('gauge_1').setValue(P/100.0);}, 3000);">
-       </canvas>
-               
-       
-      <div style="width:50%;height:20px;float:left;margin-top:0px;"><h1><span class="Delta_P">...</span> Hpa </h1></div>
-      <div style="width:50%;height:20px;float:left;margin-top:0px;"><h1><span class="Delta_P">...</span> Hpa </h1></div> 
-	   
-       <p><small>3h VARIATIONS</small></p>
-	   
-       <div style="width:80%;margin-top: -7px;float:left;"><span class="Delta_P">...</span> Hpa @ <span class="Delta_P">...</span></div>
-       <div style="width:20%;margin-top: -7px;float:left;"><span class="Delta_P_state"></span></div>
-	   
-       <div style="width:80%;margin-top: 8px;float:left;"><span class="Delta_P">...</span> Hpa @ <span class="Delta_P">...</span></div>
-       <div style="width:20%;margin-top: 8px;float:left;"><span class="Delta_P_state"></span></div>
-	  
-       <div style="width:80%;margin-top: 8px;float:left;"><span class="Delta_P">...</span> Hpa @ <span class="Delta_P">...</span></div>
-       <div style="width:20%;margin-top: 8px;float:left;"><span class="Delta_P_state"></span></div>
-       
-       </div>
-        
-       <div class="N_box" style="height:155px;">
-       <div style="height:20px;margin-top: 3px;"><h1>WIND SPEED</h1></div>
-       <div style="height:20px; margin-top:3px; margin-bottom:3px;"><h3><span class="wind_speed_data">...</span> Km/h</h3></div>
-       
-       <div class="R_box"> 
-       
-       <div id="myProgress" style="padding-top:-10px;">
-       <div id="myBar">
-       </div>     
-       </div>
-       </div>
-
-       <script>
-
-        var elem = document.getElementById("myBar");   
-        var width = 50;
-        var id = setInterval(frame, 10);
-        
-        function frame() {
-          if (width > wind_speed) {
-              width--; 
-              elem.style.width = width + '%'; 
-              } 
-    
-          if (width < wind_speed) {
-            width++; 
-            elem.style.width = width + '%';
-              }
-
-          if (width == wind_speed) {
-            elem.style.width = width + '%';
-        }
-      }
-
-        </script>
-       
-       <div style="height:10px; margin-bottom:0px; margin-top:10px"><h1>MAX VAL</h1></div>
-       <div style="font-size:14px; margin-top:6px; margin-bottom:20px;">&#9650<span class="wind_speed_data">...</span> Km/h @ <span class="wind_speed_data">...    </span></div>
-         <div style="margin-top:-10px;"><h1>LAST HOUR - YESTERDAY AVG</h1></div>
-   
-        
-        <div style="width:50%;margin-top:8px;float:left;font-size:14px;"><span class="wind_speed_data">...</span> Km/h</div>
-        <div style="width:50%;margin-top:8px;float:left;font-size:14px;"><span class="wind_speed_data">...</span> Km/h</div>
-        </div>
-       
-       <div class="N_box"style="height:122px;">
-            
-            <div style="margin-top:3px;"><h1>RAIN FALL</h1></div>
-            
-            <div style="width:50%;float:left;margin-top:10px;">NOW</div>
-            <div style="width:50%;float:left;margin-top:10px;"><span class="rain_data">...</span> mm</div>
-	          <div style="width:50%;float:left;margin-top:9px;">LAST HOUR</div>
-            <div style="width:50%;float:left;margin-top:9px;"><span class="rain_data">...</span> mm</div>
-	          <div style="width:50%;float:left;margin-top:8px;">TODAY</div>
-	          <div style="width:50%;float:left;margin-top:8px;"><span class="rain_data">...</span> mm</div>
-	          <div style="width:50%;float:left;margin-top:8px;">YESYERDAY</div>
-            <div style="width:50%;float:left;margin-top:8px;"><span class="rain_data">...</span> mm</div>           
-            <div style="width:50%;float:left;margin-top:8px;">LAST WEEK</div>
-            <div style="width:50%;float:left;margin-top:8px;"><span class="rain_data">...</span> mm</div>
-           
-           <div class="R_box" style="margin-top:8px;"> 
-       
-       <div id="myProgress4;">
-       <div id="myBar4">
-       </div>     
-       </div>
-       </div>
-
-       <script>
-
-        var elem4 = document.getElementById("myBar4");   
-        var width4 = 50;
-        var id4 = setInterval(frame, 10);
-        
-        function frame() {
-          if (width4 > rain_fall) {
-              width4--; 
-              elem4.style.width = width4 + '%'; 
-              } 
-    
-          if (width4 < rain_fall) {
-            width4++; 
-            elem4.style.width = width4 + '%';
-              }
-
-          if (width4 == rain_fall) {
-            elem4.style.width = width4 + '%';
-        }
-      }
-
-        </script>
-	      </div>
-        </div>
-        
-        <div class="D_box">
-        <div class="C_box">
-       
-        <div style="margin-top:3px;"><h1>OUT TEMPERATURE</h1></div>
-       
-       <canvas id="gauge_3" 
-       data-title="OUT TEMP" 
-       data-units="&deg;C" 
-       width="180" height="180" 
-       data-major-ticks="-5 0 5 10 15 20 25 30 35 40" 
-       data-type="canv-gauge" data-min-value="-5" 
-       data-max-value="40" 
-       data-highlights="-5 0 #4D89F2, 0 5 #4D89F2, 5 10 #4D89F2, 10 15 #25B8D9, 15 20 #0BB950, 20 25 #cc5, 25 40 #f33" 
-       data-onready="setInterval( function() { Gauge.Collection.get('gauge_3').setValue(t2);}, 3000);"></canvas>
-              
-       <h1><div style="margin-top:0px;">&#9650 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div></h1>
-       <h1><div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div></h1>
-
-	     </div>
-	   
-       <div class="C_box">
-       
-       <div style="margin-top:3px;"><h1>OUT HUMIDITY</h1></div>
-       <canvas id="gauge_5" 
-       data-title="OUT HUM" 
-       data-units="%" 
-       width="180" 
-       height="180" 
-       data-major-ticks="0 10 20 30 40 50 60 70 80 90 100" 
-       data-type="canv-gauge" 
-       data-min-value="0" 
-       data-max-value="100" 
-       data-highlights="0 20 #f33, 20 40 #cc5, 40 60 #0BB950, 60 80 #25B8D9, 80 100 #4D89F2" 
-       data-onready="setInterval( function() { Gauge.Collection.get('gauge_5').setValue(h2);}, 3000);"></canvas>
-       
-       <h1><div style="margin-top:0px;">&#9650 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div></h1>
-       <h1><div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div></h1>
-       
-       </div>
-       
-       <div class="C_box" style="height:74px;">
-      
-	     <div style="width:50%;float:left;margin-top:3px;"><h1>HEAT INDEX</h1></div>
-       <div style="width:50%;float:left;margin-top:3px;"><h2><span class="T_H_data">...</span> �C </h2></div>
-       <div style="margin-top:20px;"><span class="HI_state">...</span></div>
-       <h1><div style="margin-top:18px;">&#9650 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div></h1>
-       
-       </div>
-       </div> 
-       </div>
-	
-       <div class="C1_box">
-       <div class="D_box">
-       <div class="C_box">
-      
-       <div style="margin-top:3px;"><h1>IN TEMPERATURE</h1></div>
-       
-       <canvas id="gauge_2" 
-       data-title="IN TEMP" 
-       data-units="&deg;C" 
-       width="180" 
-       height="180" 
-       data-major-ticks="5 10 15 20 25 30 35" 
-       data-type="canv-gauge" data-min-value="5"        
-       data-max-value="35" 
-       data-highlights="5 10 #4D89F2, 10 15 #cc5, 15 20 #0BB950, 20 25 #0BB950, 25 30 #f33, 30 35 #f33" 
-       data-onready="setInterval( function() { Gauge.Collection.get('gauge_2').setValue(t1);}, 3000);"></canvas>
-           
-       <h1><div style="margin-top:0px;">&#9650 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div></h1>
-       <h1><div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div></h1>
-       </div>
-              
-       <div class="C_box">
-             	      
-      <div style="margin-top:3px;"><h1>IN HUMIDITY</h1></div>
-       
-       <canvas id="gauge_4" 
-       data-title="IN HUM" 
-       data-units="%" 
-       width="180" 
-       height="180" 
-       data-major-ticks="0 10 20 30 40 50 60 70 80 90 100" 
-       data-type="canv-gauge" 
-       data-min-value="0" 
-       data-max-value="100" 
-       data-highlights="0 20 #f33, 20 40 #cc5, 40 60 #0BB950, 60 80 #25B8D9, 80 100 #4D89F2" 
-       data-onready="setInterval( function() { Gauge.Collection.get('gauge_4').setValue(h1);}, 3000);"></canvas>
-       
-       <h1><div style="margin-top:0px;">&#9650 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div></h1>
-       <h1><div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div></h1>
-              
-       </div>
-       
-       <div class="P_box" style="height:72px;">
-       <h1><div style="margin-top:15px;float:center;text-align:center;">IN/OUT &#9650 T&nbsp <span class="T_H_data">...</span> �C </div></h1>
-       <h1><div style="margin-top:10px;float:center;text-align:center;">IN/OUT &#9650 H&nbsp <span class="T_H_data">...</span> % </div></h1> 
-       </div>
-       </div>
-   
-       <div class="D_box">
-      
-       <div class="P_box" style="height:190px;">
-       <div style="margin-top:3px;"><h1>INDOOR AIR QUALITY INDEX</h1></div>
-       <p><h3><span class="aqs_data">...</span> %</h3></p>
-        
-       <div class="Q_box">  
+         <div class="A_box">
+            <div class="G_box">
+               <div style="margin-top:3px;">
+                  <h1>BAROMETRIC PRESSURE</h1>
+               </div>
+               <div id="gauge1text">BAROMETRIC PRESSURE</div>
+               <canvas width=200 height=100 id="gauge1">P</canvas>
+               <div style="width:50%;height:20px;float:left;margin-top:0px;">
+                  <h1><span class="Delta_P">...</span> Hpa </h1>
+               </div>
+               <div style="width:50%;height:20px;float:left;margin-top:0px;">
+                  <h1><span class="Delta_P">...</span> Hpa </h1>
+               </div>
+               <p><small>3h VARIATIONS</small></p>
+               <div style="width:80%;margin-top: -7px;float:left;"><span class="Delta_P">...</span> Hpa @ <span class="Delta_P">...</span></div>
+               <div style="width:20%;margin-top: -7px;float:left;"><span class="Delta_P_state"></span></div>
+               <div style="width:80%;margin-top: 8px;float:left;"><span class="Delta_P">...</span> Hpa @ <span class="Delta_P">...</span></div>
+               <div style="width:20%;margin-top: 8px;float:left;"><span class="Delta_P_state"></span></div>
+               <div style="width:80%;margin-top: 8px;float:left;"><span class="Delta_P">...</span> Hpa @ <span class="Delta_P">...</span></div>
+               <div style="width:20%;margin-top: 8px;float:left;"><span class="Delta_P_state"></span></div>
+            </div>
+            <div class="N_box" style="height:155px;">
+               <div style="height:20px;margin-top: 3px;">
+                  <h1>WIND SPEED</h1>
+               </div>
+               <div style="height:20px; margin-top:3px; margin-bottom:3px;">
+                  <h3><span class="wind_speed_data">...</span> Km/h</h3>
+               </div>
+               <div class="R_box">
+                  <div id="myProgress" style="padding-top:-10px;">
+                     <div id="myBar">
+                     </div>
+                  </div>
+               </div>
+               <script>
+                  var elem = document.getElementById("myBar");   
+                  var width = 50;
+                  var id = setInterval(frame, 10);
                   
-       <div id="myProgress2">
-       <div id="myBar2">
-	     </div>
-       </div>
-       
-       <script>
-
-        var elem2 = document.getElementById("myBar2");   
-        var width2 = 50;
-        var id2 = setInterval(frame, 10);
-        
-        function frame() {
-          if (width2 > aqspercent) {
-              width2--; 
-              elem2.style.width = width2 + '%'; 
-              } 
-    
-          if (width2 < aqspercent) {
-            width2++; 
-            elem2.style.width = width2 + '%';
-              }
-
-          if (width2 == aqspercent) {
-            elem2.style.width = width2 + '%';
-        }
-      }
-
-      </script>
-    
+                  function frame() {
+                    if (width > wind_speed) {
+                        width--; 
+                        elem.style.width = width + '%'; 
+                        } 
+                  
+                    if (width < wind_speed) {
+                      width++; 
+                      elem.style.width = width + '%';
+                        }
+                  
+                    if (width == wind_speed) {
+                      elem.style.width = width + '%';
+                  }
+                  }
+                  
+               </script>
+               <div style="height:10px; margin-bottom:0px; margin-top:10px">
+                  <h1>MAX VAL</h1>
+               </div>
+               <div style="font-size:14px; margin-top:6px; margin-bottom:20px;">&#9650<span class="wind_speed_data">...</span> Km/h @ <span class="wind_speed_data">...    </span></div>
+               <div style="margin-top:-10px;">
+                  <h1>LAST HOUR - YESTERDAY AVG</h1>
+               </div>
+               <div style="width:50%;margin-top:8px;float:left;font-size:14px;"><span class="wind_speed_data">...</span> Km/h</div>
+               <div style="width:50%;margin-top:8px;float:left;font-size:14px;"><span class="wind_speed_data">...</span> Km/h</div>
+            </div>
+            <div class="N_box"style="height:122px;">
+               <div style="margin-top:3px;">
+                  <h1>RAIN FALL</h1>
+               </div>
+               <div style="width:50%;float:left;margin-top:10px;">NOW</div>
+               <div style="width:50%;float:left;margin-top:10px;"><span class="rain_data">...</span> mm</div>
+               <div style="width:50%;float:left;margin-top:9px;">LAST HOUR</div>
+               <div style="width:50%;float:left;margin-top:9px;"><span class="rain_data">...</span> mm</div>
+               <div style="width:50%;float:left;margin-top:8px;">TODAY</div>
+               <div style="width:50%;float:left;margin-top:8px;"><span class="rain_data">...</span> mm</div>
+               <div style="width:50%;float:left;margin-top:8px;">YESYERDAY</div>
+               <div style="width:50%;float:left;margin-top:8px;"><span class="rain_data">...</span> mm</div>
+               <div style="width:50%;float:left;margin-top:8px;">LAST WEEK</div>
+               <div style="width:50%;float:left;margin-top:8px;"><span class="rain_data">...</span> mm</div>
+               <div class="R_box" style="margin-top:8px;">
+                  <div id="myProgress4;">
+                     <div id="myBar4">
+                     </div>
+                  </div>
+               </div>
+               <script>
+                  var elem4 = document.getElementById("myBar4");   
+                  var width4 = 50;
+                  var id4 = setInterval(frame, 10);
+                  
+                  function frame() {
+                    if (width4 > rain_fall) {
+                        width4--; 
+                        elem4.style.width = width4 + '%'; 
+                        } 
+                  
+                    if (width4 < rain_fall) {
+                      width4++; 
+                      elem4.style.width = width4 + '%';
+                        }
+                  
+                    if (width4 == rain_fall) {
+                      elem4.style.width = width4 + '%';
+                  }
+                  }
+                  
+               </script>
+            </div>
+         </div>
+         <div class="D_box">
+            <div class="C_box">
+               <div style="margin-top:3px;">
+                  <h1>OUT TEMPERATURE</h1>
+               </div>
+               <div id="gauge3text">OUT TEMPERATURE</div>
+               <canvas width=200 height=100 id="gauge3">t2</canvas>
+               <h1>
+                  <div style="margin-top:0px;">&#9650 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div>
+               </h1>
+               <h1>
+                  <div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div>
+               </h1>
+            </div>
+            <div class="C_box">
+               <div style="margin-top:3px;">
+                  <h1>OUT HUMIDITY</h1>
+               </div>
+               <div id="gauge5text">OUT HUMIDITY</div>
+               <canvas width=200 height=100 id="gauge5">h2</canvas>
+               <h1>
+                  <div style="margin-top:0px;">&#9650 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div>
+               </h1>
+               <h1>
+                  <div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div>
+               </h1>
+            </div>
+            <div class="C_box" style="height:74px;">
+               <div style="width:50%;float:left;margin-top:3px;">
+                  <h1>HEAT INDEX</h1>
+               </div>
+               <div style="width:50%;float:left;margin-top:3px;">
+                  <h2><span class="T_H_data">...</span> �C </h2>
+               </div>
+               <div style="margin-top:20px;"><span class="HI_state">...</span></div>
+               <h1>
+                  <div style="margin-top:18px;">&#9650 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div>
+               </h1>
+            </div>
+         </div>
       </div>
-      <p>&#9650 <span class="aqs_data">...</span> % @ <span class="aqs_data">...</span></p>
-      <p>&#9660 <span class="aqs_data">...</span> % @ <span class="aqs_data">...</span></p>
-      <small><p>&#9835 <span class="aqs_data">...</span></p></small>
+      <div class="C1_box">
+         <div class="D_box">
+            <div class="C_box">
+               <div style="margin-top:3px;">
+                  <h1>IN TEMPERATURE</h1>
+               </div>
+               <div id="gauge2text">IN TEMPERATURE</div>
+               <canvas width=200 height=100 id="gauge2">t1</canvas>
+               <h1>
+                  <div style="margin-top:0px;">&#9650 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div>
+               </h1>
+               <h1>
+                  <div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div>
+               </h1>
+            </div>
+            <div class="C_box">
+               <div style="margin-top:3px;">
+                  <h1>IN HUMIDITY</h1>
+               </div>
+               <div id="gauge4text">IN HUMIDITY</div>
+               <canvas width=200 height=100 id="gauge4">h1</canvas>
+               <h1>
+                  <div style="margin-top:0px;">&#9650 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div>
+               </h1>
+               <h1>
+                  <div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div>
+               </h1>
+            </div>
+            <div class="P_box" style="height:72px;">
+               <h1>
+                  <div style="margin-top:15px;float:center;text-align:center;">IN/OUT &#9650 T&nbsp <span class="T_H_data">...</span> �C </div>
+               </h1>
+               <h1>
+                  <div style="margin-top:10px;float:center;text-align:center;">IN/OUT &#9650 H&nbsp <span class="T_H_data">...</span> % </div>
+               </h1>
+            </div>
+         </div>
+         <div class="D_box">
+            <div class="P_box" style="height:190px;">
+               <div style="margin-top:3px;">
+                  <h1>INDOOR AIR QUALITY INDEX</h1>
+               </div>
+               <p>
+               <h3><span class="aqs_data">...</span> %</h3>
+               </p>
+               <div class="Q_box">
+                  <div id="myProgress2">
+                     <div id="myBar2">
+                     </div>
+                  </div>
+                  <script>
+                     var elem2 = document.getElementById("myBar2");   
+                     var width2 = 50;
+                     var id2 = setInterval(frame, 10);
+                     
+                     function frame() {
+                       if (width2 > aqspercent) {
+                           width2--; 
+                           elem2.style.width = width2 + '%'; 
+                           } 
+                     
+                       if (width2 < aqspercent) {
+                         width2++; 
+                         elem2.style.width = width2 + '%';
+                           }
+                     
+                       if (width2 == aqspercent) {
+                         elem2.style.width = width2 + '%';
+                     }
+                     }
+                     
+                  </script>
+               </div>
+               <p>&#9650 <span class="aqs_data">...</span> % @ <span class="aqs_data">...</span></p>
+               <p>&#9660 <span class="aqs_data">...</span> % @ <span class="aqs_data">...</span></p>
+               <small>
+                  <p>&#9835 <span class="aqs_data">...</span></p>
+               </small>
+            </div>
+            <div class="P_box"style="height:190px;">
+               <div style="margin-top:3px;">
+                  <h1>INDOOR CO2 VALUE</h1>
+               </div>
+               <p>
+               <h3><span class="CO2_data">...</span> ppm</h3>
+               </p>
+               <div class="Q_box">
+                  <div id="myProgress3">
+                     <div id="myBar3">
+                     </div>
+                  </div>
+                  <script>
+                     var elem3 = document.getElementById("myBar3");   
+                     var width3 = 50;
+                     var id3 = setInterval(frame, 10);
+                     
+                     function frame() {
+                       if (width3 > ppmCO2_b) {
+                           width3--; 
+                           elem3.style.width = width3 + '%'; 
+                           } 
+                     
+                       if (width3 < ppmCO2_b) {
+                         width3++; 
+                         elem3.style.width = width3 + '%';
+                           }
+                     
+                       if (width3 == ppmCO2_b) {
+                         elem3.style.width = width3 + '%';
+                     }
+                     }
+                     
+                  </script>
+               </div>
+               <p>&#9650 <span class="CO2_data">...</span> ppm @ </span> <span class="CO2_data">...</span></p>
+               <p>&#9660 <span class="CO2_data">...</span> ppm @ </span> <span class="CO2_data">...</span></p>
+               <small>
+                  <p>&#9835 <span class="CO2_data">...</span></p>
+               </small>
+            </div>
+            <div class="P_box"style="height:50px;">
+               <h1>VENTILATION REQUIRED</h1>
+               <div style="margin-top:0px;"><span id="OUT_3">...</span></div>
+            </div>
+         </div>
+      </div>
       </div>  
-   
-      <div class="P_box"style="height:190px;">
-      
-      <div style="margin-top:3px;"><h1>INDOOR CO2 VALUE</h1></div>
-      <p><h3><span class="CO2_data">...</span> ppm</h3></p>
-   
-      <div class="Q_box">
-      
-      <div id="myProgress3">
-      <div id="myBar3">
-	    </div>
-      </div>
-
-      <script>
-
-        var elem3 = document.getElementById("myBar3");   
-        var width3 = 50;
-        var id3 = setInterval(frame, 10);
-        
-        function frame() {
-          if (width3 > ppmCO2_b) {
-              width3--; 
-              elem3.style.width = width3 + '%'; 
-              } 
-    
-          if (width3 < ppmCO2_b) {
-            width3++; 
-            elem3.style.width = width3 + '%';
-              }
-
-          if (width3 == ppmCO2_b) {
-            elem3.style.width = width3 + '%';
-        }
-      }
-
-      </script>
-      
-      </div>
-      <p>&#9650 <span class="CO2_data">...</span> ppm @ </span> <span class="CO2_data">...</span></p>
-      <p>&#9660 <span class="CO2_data">...</span> ppm @ </span> <span class="CO2_data">...</span></p>
-      <small><p>&#9835 <span class="CO2_data">...</span></p></small>
-      </div>
-      
-      <div class="P_box"style="height:50px;">
-      <h1>VENTILATION REQUIRED</h1>
-      <div style="margin-top:0px;"><span id="OUT_3">...</span></div>
-	  
-	    </div>
-      </div>
-      </div>
-      </div>  
-                
       <div class="A_box">
-      <div class="E_box">
-      
-    
-      <div style="margin-top:3px;"><h1>ELECTRIC ACTIVE POWER</h1></div>
-      <canvas id="gauge_6" 
-      data-units="W" 
-      width="170" 
-      height="170" 
-      data-major-ticks="0 500 1000 1500 2000 2500 3000" 
-      data-type="canv-gauge" 
-      data-min-value="0" 
-      data-max-value="3000" data-highlights="0 1000 #0BB950 1000 2000 #cc5 2000 3000 #f33" 
-      data-onready="setInterval( function() { Gauge.Collection.get('gauge_6').setValue(realPower);}, 3000);"></canvas>
-      
-      <p>&#9650 <span class="energy_monitor_max_min_data">...</span> W @ <span class="energy_monitor_max_min_data">...</span></p>
-      <div style="margin-top:25px;float:center;text-align:center;"><small> &#9835 <span class="energy_monitor_max_min_data">...</span></small></div> 
-      
+         <div class="E_box">
+            <div style="margin-top:3px;">
+               <h1>ELECTRIC ACTIVE POWER</h1>
+            </div>
+            <div id="gauge6text">ELECTRIC ACTIVE POWER</div>
+            <canvas width=200 height=100 id="gauge6">realPower</canvas>
+            <p>&#9650 <span class="energy_monitor_max_min_data">...</span> W @ <span class="energy_monitor_max_min_data">...</span></p>
+            <div style="margin-top:25px;float:center;text-align:center;"><small> &#9835 <span class="energy_monitor_max_min_data">...</span></small></div>
+         </div>
+         <div class="N_box" style="height:72px;">
+            <div style="margin-top:3px;">
+               <h1>RMS LINE VOLTAGE</h1>
+            </div>
+            <div style="margin-top:10px;">
+               <h3><span class="energy_monitor">...</span> V</h3>
+            </div>
+            <div style="margin-top:15px;"<small>&#9650 <span class="energy_monitor_max_min_data">...</span> V / &#9660 <span class="energy_monitor_max_min_data">...  </span> V</small>
+         </div>
       </div>
-    
-                  
-      <div class="N_box" style="height:72px;">
-      <div style="margin-top:3px;"><h1>RMS LINE VOLTAGE</h1></div>
-      <div style="margin-top:10px;"><h3><span class="energy_monitor">...</span> V</h3></div>
-      <div style="margin-top:15px;"<small>&#9650 <span class="energy_monitor_max_min_data">...</span> V / &#9660 <span class="energy_monitor_max_min_data">...  </span> V</small></div>
-      
-      </div>
-      
       <div class="N_box" style="height:50px;">
-      <div style="margin-top:3px;"><h1>RMS LINE CURRENT</h1></div>
-      <p><h3><span class="energy_monitor">...</span> A</h3></p>
-     
+         <div style="margin-top:3px;">
+            <h1>RMS LINE CURRENT</h1>
+         </div>
+         <p>
+         <h3><span class="energy_monitor">...</span> A</h3>
+         </p>
       </div>
-
       <div class="N_box" style="height:50px;">
-      
-      <div style="margin-top:8px;"><h1>APPARENT POWER <span class="energy_monitor">...</span> VA</h1></div>
-      <div style="margin-top:12px;"><h1>POWER FACTOR <span class="energy_monitor">...</span></h1></div>
+         <div style="margin-top:8px;">
+            <h1>APPARENT POWER <span class="energy_monitor">...</span> VA</h1>
+         </div>
+         <div style="margin-top:12px;">
+            <h1>POWER FACTOR <span class="energy_monitor">...</span></h1>
+         </div>
       </div>
-      
       <div class="N_box" style="height:125px;">
-      
-      <div style="margin-top:3px;"><h1>ENERGY CONSUMPTION</h1></div>
-      
-      <div style="width:50%;height:25px;float:left;margin-top:10px;">TODAY </div>
-      <div style="width:50%;height:25px;float:left;margin-top:10px;"><span class="energy_monitor">...</span> W/h</div>
-	  
-      <div style="width:50%;height:25px;float:left;">LAST HOUR </div>
-      <div style="width:50%;height:25px;float:left;"><span class="energy_monitor">...</span> W/h</div>
-	  
-      <div style="width:50%;height:25px;float:left;">YESTERDAY </div>
-      <div style="width:50%;height:25px;float:left;"><span class="energy_monitor">...</span> Kw/h</div>
-	  
-      <div style="width:50%;height:25px;float:left;">LAST WEEK </div>
-      <div style="width:50%;height:25px;float:left;"><span class="energy_monitor">...</span> Kw/h</div>
-	  	        
+         <div style="margin-top:3px;">
+            <h1>ENERGY CONSUMPTION</h1>
+         </div>
+         <div style="width:50%;height:25px;float:left;margin-top:10px;">TODAY </div>
+         <div style="width:50%;height:25px;float:left;margin-top:10px;"><span class="energy_monitor">...</span> W/h</div>
+         <div style="width:50%;height:25px;float:left;">LAST HOUR </div>
+         <div style="width:50%;height:25px;float:left;"><span class="energy_monitor">...</span> W/h</div>
+         <div style="width:50%;height:25px;float:left;">YESTERDAY </div>
+         <div style="width:50%;height:25px;float:left;"><span class="energy_monitor">...</span> Kw/h</div>
+         <div style="width:50%;height:25px;float:left;">LAST WEEK </div>
+         <div style="width:50%;height:25px;float:left;"><span class="energy_monitor">...</span> Kw/h</div>
       </div>
       </div>
-      
       <div class="F_box">
-      <div class="I_box" style="height:50px;">
-      <div style="margin-top:1px;"><h1>SERVER ACTIVITY</h1></div>      
-      <div style="margin-top:6px;"><h2><span class="time">...</span></h2></div>    
-      
-      </div> 
-       
-      <div class="I_box" style="height:100px;">
-      <div style="margin-top:1px;"><h1>ENCLOSURE TEMP.</h1></div>
-      <div style="margin-top:2px;"><h2><span class="bmp_temp">...</span>�C </h2></div>      
-      <div style="margin-top:6px;"><span id="OUT_4">...</span></div>
-      <div style="margin-top:12px;float:center;text-align:center;"><small><span class="bmp_temp">...</span></small></div>
-   
-      
+         <div class="I_box" style="height:50px;">
+            <div style="margin-top:1px;">
+               <h1>SERVER ACTIVITY</h1>
+            </div>
+            <div style="margin-top:6px;">
+               <h2><span class="time">...</span></h2>
+            </div>
+         </div>
+         <div class="I_box" style="height:100px;">
+            <div style="margin-top:1px;">
+               <h1>ENCLOSURE TEMP.</h1>
+            </div>
+            <div style="margin-top:2px;">
+               <h2><span class="bmp_temp">...</span>�C </h2>
+            </div>
+            <div style="margin-top:6px;"><span id="OUT_4">...</span></div>
+            <div style="margin-top:12px;float:center;text-align:center;"><small><span class="bmp_temp">...</span></small></div>
+         </div>
       </div>
-      </div>
-      
       <div class="S_box">
-         
-      <div class="I_box">
-      <div style="margin-top:8px;"><button class= "button" type="button" id="BUZZER_OFF" onclick="GetButtonTacitate()">MUTE ALARM: OFF</button></div>
+         <div class="I_box">
+            <div><button class= "button" type="button" id="BUZZER_OFF" onclick="GetButtonTacitate()">MUTE ALARM: OFF</button></div>
+         </div>
+         <div class="I_box">
+            <div><button class= "button" type="button" id="RESET" onclick="GetButtonReset()">CLEAR/LOCK  &#9650&#9660 : OFF</button></div>
+         </div>
+         <div class="I_box">
+            <div><button class= "button" type="button" id="OUT_1" onclick="GetButtonOUT1()">SET OUT 1: ON/OFF</button></div>
+         </div>
+         <div class="I_box">
+            <div><button class= "button" type="button" id="OUT_2" onclick="GetButtonOUT2()">SET OUT 2: ON/OFF</button></div>
+         </div>
       </div>
-      
-      <div class="I_box">
-      <div style="margin-top:8px;"><button class= "button" type="button" id="RESET" onclick="GetButtonReset()">CLEAR/LOCK  &#9650&#9660 : OFF</button></div>
-      </div>
-      
-      <div class="I_box">
-      <div style="margin-top:8px;"><button class= "button" type="button" id="OUT_1" onclick="GetButtonOUT1()">SET OUT 1: ON/OFF</button></div>
-      </div>
-      
-      <div class="I_box">
-      <div style="margin-top:8px;"><button class= "button" type="button" id="OUT_2" onclick="GetButtonOUT2()">SET OUT 2: ON/OFF</button></div>
-      </div>
-      </div>
-   
-  
-  
-  
-  </body>
+   </body>
+   <script src="assets/js/gaugePersonal.js"></script>
+   <script src="assets/js/giorgio.js"></script>
+   <script>
+      gauge1.set(P)           //Barometric Pressure
+      gauge2.set(t1)          //IN TEMPERATURE
+      gauge3.set(t2)          //OUT TEMPERATURE
+      gauge4.set(h1)          //IN HUMIDITY
+      gauge5.set(h2)          //OUT HUMIDITY
+      gauge6.set(realPower)   //ELECTRIC ACTIVE POWER
+   </script>
 </html>
