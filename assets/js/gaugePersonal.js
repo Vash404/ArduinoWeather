@@ -135,6 +135,13 @@ var opts = {
         color: "#000000",  // Optional: Label text color
         fractionDigits: 0  // Optional: Numerical precision. 0=round off.
     },*/
+    staticZones: [
+        {strokeStyle: "#F03E3E", min: 0, max: 30}, // Red from 100 to 130
+        {strokeStyle: "#FFDD00", min: 30, max: 40}, // Yellow
+        {strokeStyle: "#30B32D", min: 40, max: 60}, // Green
+        {strokeStyle: "#FFDD00", min: 60, max: 70}, // Yellow
+        {strokeStyle: "#F03E3E", min: 70, max: 100}  // Red
+     ],
     
 
     limitMax: false,     // If false, max value increases automatically if value > maxValue
@@ -172,6 +179,13 @@ var opts = {
         color: "#000000",  // Optional: Label text color
         fractionDigits: 0  // Optional: Numerical precision. 0=round off.
     },*/
+    staticZones: [
+        {strokeStyle: "#F03E3E", min: 0, max: 30}, // Red from 100 to 130
+        {strokeStyle: "#FFDD00", min: 30, max: 40}, // Yellow
+        {strokeStyle: "#30B32D", min: 40, max: 75}, // Green
+        {strokeStyle: "#FFDD00", min: 75, max: 90}, // Yellow
+        {strokeStyle: "#F03E3E", min: 90, max: 100}  // Red
+     ],
 
     limitMax: false,     // If false, max value increases automatically if value > maxValue
     limitMin: false,     // If true, the min value of the gauge will be fixed

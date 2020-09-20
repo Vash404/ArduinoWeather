@@ -137,8 +137,10 @@
                <div style="margin-top:3px;">
                   <h1>IN TEMPERATURE</h1>
                </div>
+
                <canvas width=200 height=100 id="gauge2">t1</canvas>
                <div class="gaugetext" id="gauge2text">IN TEMPERATURE</div>
+               
                <h1>
                   <div style="margin-top:0px;">&#9650 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div>
                </h1>
@@ -339,4 +341,24 @@
       gauge5.set(h2)          //OUT HUMIDITY
       gauge6.set(realPower)   //ELECTRIC ACTIVE POWER
    </script>
+
+   <script>
+      document.onkeypress = function (e){
+         e = e || window.event;
+         if (e.keyCode === 13) {
+            gauge1.set(getRandomInt(0,104000)/100)       //Barometric Pressure
+            gauge2.set(getRandomInt(0,35))          //IN TEMPERATURE
+            gauge3.set(getRandomInt(0,40))          //OUT TEMPERATURE
+            gauge4.set(getRandomInt(0,100))          //IN HUMIDITY
+            gauge5.set(getRandomInt(0,100))          //OUT HUMIDITY
+            gauge6.set(getRandomInt(0,3000))   //ELECTRIC ACTIVE POWER
+         }
+      }
+
+      function getRandomInt(min, max) {
+         min = Math.ceil(min);
+         max = Math.floor(max);
+         return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      </script>
 </html>
