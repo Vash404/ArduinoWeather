@@ -2,30 +2,36 @@
 <html>
    <head>
       <meta charset="UTF-8">
-      <title>MYHOME6</title>
+      <title>MYHOME7</title>
       <link rel="stylesheet" href="assets/css/main.css"><!--Css file-->
       <script src="assets/js/gauge.js"></script> <!--Javascript file per nuovi contatori-->
    </head>
    <body onload="GetArduinoIO()">
       <div style="width:80%; float:left;">
-         <h2>MYHOME6</h2>
+         <h2>MYHOME7</h2>
       </div>
+
       <div style="width:20%; float:left;">
          <h2><span class="time">...</span></h2>
       </div>
-      </div>
-      <div class="C1_box">
-         <div class="A_box">
-            <div class="G_box">
+      
+      <div class="container">
+         <!-- Pannello Esterno -->
+      <div class="esterno">
+         <h3 style="text-align: left;">Esterno</h3>
+         <div class="boxnew">
+            <div class="boxnew withborder">
                <div style="margin-top:3px;">
                   <h1>BAROMETRIC PRESSURE</h1>
                </div>
                
                <canvas width=200 height=100 id="gauge1">P</canvas>
                <div class="gaugetext" id="gauge1text">BAROMETRIC PRESSURE</div>
+
                <div style="width:50%;height:20px;float:left;margin-top:0px;">
                   <h1><span class="Delta_P">...</span> Hpa </h1>
                </div>
+
                <div style="width:50%;height:20px;float:left;margin-top:0px;">
                   <h1><span class="Delta_P">...</span> Hpa </h1>
                </div>
@@ -37,41 +43,19 @@
                <div style="width:80%;margin-top: 8px;float:left;"><span class="Delta_P">...</span> Hpa @ <span class="Delta_P">...</span></div>
                <div style="width:20%;margin-top: 8px;float:left;"><span class="Delta_P_state"></span></div>
             </div>
-            <div class="N_box" style="height:155px;">
-               <div style="height:20px;margin-top: 3px;">
+            <div class="boxnew withborder">
+               <div style="margin-top: 3px;">
                   <h1>WIND SPEED</h1>
                </div>
                <div style="height:20px; margin-top:3px; margin-bottom:3px;">
                   <h3><span class="wind_speed_data">...</span> Km/h</h3>
                </div>
-               <div class="R_box">
+               <div class="loadingbar">
                   <div id="myProgress" style="padding-top:-10px;">
                      <div id="myBar">
                      </div>
                   </div>
                </div>
-               <script>
-                  var elem = document.getElementById("myBar");   
-                  var width = 50;
-                  var id = setInterval(frame, 10);
-                  
-                  function frame() {
-                    if (width > wind_speed) {
-                        width--; 
-                        elem.style.width = width + '%'; 
-                        } 
-                  
-                    if (width < wind_speed) {
-                      width++; 
-                      elem.style.width = width + '%';
-                        }
-                  
-                    if (width == wind_speed) {
-                      elem.style.width = width + '%';
-                  }
-                  }
-                  
-               </script>
                <div style="height:10px; margin-bottom:0px; margin-top:10px">
                   <h1>MAX VAL</h1>
                </div>
@@ -82,52 +66,30 @@
                <div style="width:50%;margin-top:8px;float:left;font-size:14px;"><span class="wind_speed_data">...</span> Km/h</div>
                <div style="width:50%;margin-top:8px;float:left;font-size:14px;"><span class="wind_speed_data">...</span> Km/h</div>
             </div>
-            <div class="N_box"style="height:122px;">
+            <div class="boxnew withborder">
                <div style="margin-top:3px;">
                   <h1>RAIN FALL</h1>
                </div>
-               <div style="width:50%;float:left;margin-top:10px;">NOW</div>
-               <div style="width:50%;float:left;margin-top:10px;"><span class="rain_data">...</span> mm</div>
-               <div style="width:50%;float:left;margin-top:9px;">LAST HOUR</div>
-               <div style="width:50%;float:left;margin-top:9px;"><span class="rain_data">...</span> mm</div>
-               <div style="width:50%;float:left;margin-top:8px;">TODAY</div>
-               <div style="width:50%;float:left;margin-top:8px;"><span class="rain_data">...</span> mm</div>
-               <div style="width:50%;float:left;margin-top:8px;">YESYERDAY</div>
-               <div style="width:50%;float:left;margin-top:8px;"><span class="rain_data">...</span> mm</div>
-               <div style="width:50%;float:left;margin-top:8px;">LAST WEEK</div>
-               <div style="width:50%;float:left;margin-top:8px;"><span class="rain_data">...</span> mm</div>
-               <div class="R_box" style="margin-top:8px;">
+               <div class="rainfalltesto">NOW</div>
+               <div class="rainfalltesto"><span class="rain_data">...</span> mm</div>
+               <div class="rainfalltesto">LAST HOUR</div>
+               <div class="rainfalltesto"><span class="rain_data">...</span> mm</div>
+               <div class="rainfalltesto">TODAY</div>
+               <div class="rainfalltesto"><span class="rain_data">...</span> mm</div>
+               <div class="rainfalltesto">YESYERDAY</div>
+               <div class="rainfalltesto"><span class="rain_data">...</span> mm</div>
+               <div class="rainfalltesto">LAST WEEK</div>
+               <div class="rainfalltesto"><span class="rain_data">...</span> mm</div>
+               <div class="loadingbar" style="margin-top:8px;">
                   <div id="myProgress4;">
                      <div id="myBar4">
                      </div>
                   </div>
                </div>
-               <script>
-                  var elem4 = document.getElementById("myBar4");   
-                  var width4 = 50;
-                  var id4 = setInterval(frame, 10);
-                  
-                  function frame() {
-                    if (width4 > rain_fall) {
-                        width4--; 
-                        elem4.style.width = width4 + '%'; 
-                        } 
-                  
-                    if (width4 < rain_fall) {
-                      width4++; 
-                      elem4.style.width = width4 + '%';
-                        }
-                  
-                    if (width4 == rain_fall) {
-                      elem4.style.width = width4 + '%';
-                  }
-                  }
-                  
-               </script>
             </div>
          </div>
-         <div class="D_box">
-            <div class="C_box">
+         <div class="boxnew">
+            <div class="boxnew withborder">
                <div style="margin-top:3px;">
                   <h1>OUT TEMPERATURE</h1>
                </div>
@@ -140,7 +102,7 @@
                   <div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div>
                </h1>
             </div>
-            <div class="C_box">
+            <div class="boxnew withborder">
                <div style="margin-top:3px;">
                   <h1>OUT HUMIDITY</h1>
                </div>
@@ -153,7 +115,7 @@
                   <div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div>
                </h1>
             </div>
-            <div class="C_box" style="height:74px;">
+            <div class="boxnew withborder">
                <div style="width:50%;float:left;margin-top:3px;">
                   <h1>HEAT INDEX</h1>
                </div>
@@ -167,9 +129,11 @@
             </div>
          </div>
       </div>
-      <div class="C1_box">
-         <div class="D_box">
-            <div class="C_box">
+      <!-- Pannello Interno -->
+      <div class="interno">
+         <h3 style="text-align: left;">Interno</h3>
+         <div class="boxnew">
+            <div class="boxnew withborder">
                <div style="margin-top:3px;">
                   <h1>IN TEMPERATURE</h1>
                </div>
@@ -182,7 +146,7 @@
                   <div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> �C @ <span class="T_H_data">...</span></div>
                </h1>
             </div>
-            <div class="C_box">
+            <div class="boxnew withborder">
                <div style="margin-top:3px;">
                   <h1>IN HUMIDITY</h1>
                </div>
@@ -195,7 +159,7 @@
                   <div style="margin-top:10px;">&#9660 <span class="T_H_data">...</span> % @ <span class="T_H_data">...</span></div>
                </h1>
             </div>
-            <div class="P_box" style="height:72px;">
+            <div class="boxnew withborder" style="height:72px;">
                <h1>
                   <div style="margin-top:15px;float:center;text-align:center;">IN/OUT &#9650 T&nbsp <span class="T_H_data">...</span> �C </div>
                </h1>
@@ -204,41 +168,19 @@
                </h1>
             </div>
          </div>
-         <div class="D_box">
-            <div class="P_box" style="height:190px;">
+         <div class="boxnew">
+            <div class="boxnew withborder" style="height:190px;">
                <div style="margin-top:3px;">
                   <h1>INDOOR AIR QUALITY INDEX</h1>
                </div>
                <p>
                <h3><span class="aqs_data">...</span> %</h3>
                </p>
-               <div class="Q_box">
+               <div class="loadingbar">
                   <div id="myProgress2">
                      <div id="myBar2">
                      </div>
                   </div>
-                  <script>
-                     var elem2 = document.getElementById("myBar2");   
-                     var width2 = 50;
-                     var id2 = setInterval(frame, 10);
-                     
-                     function frame() {
-                       if (width2 > aqspercent) {
-                           width2--; 
-                           elem2.style.width = width2 + '%'; 
-                           } 
-                     
-                       if (width2 < aqspercent) {
-                         width2++; 
-                         elem2.style.width = width2 + '%';
-                           }
-                     
-                       if (width2 == aqspercent) {
-                         elem2.style.width = width2 + '%';
-                     }
-                     }
-                     
-                  </script>
                </div>
                <p>&#9650 <span class="aqs_data">...</span> % @ <span class="aqs_data">...</span></p>
                <p>&#9660 <span class="aqs_data">...</span> % @ <span class="aqs_data">...</span></p>
@@ -246,40 +188,18 @@
                   <p>&#9835 <span class="aqs_data">...</span></p>
                </small>
             </div>
-            <div class="P_box"style="height:190px;">
+            <div class="boxnew withborder"style="height:190px;">
                <div style="margin-top:3px;">
                   <h1>INDOOR CO2 VALUE</h1>
                </div>
                <p>
                <h3><span class="CO2_data">...</span> ppm</h3>
                </p>
-               <div class="Q_box">
+               <div class="loadingbar">
                   <div id="myProgress3">
                      <div id="myBar3">
                      </div>
                   </div>
-                  <script>
-                     var elem3 = document.getElementById("myBar3");   
-                     var width3 = 50;
-                     var id3 = setInterval(frame, 10);
-                     
-                     function frame() {
-                       if (width3 > ppmCO2_b) {
-                           width3--; 
-                           elem3.style.width = width3 + '%'; 
-                           } 
-                     
-                       if (width3 < ppmCO2_b) {
-                         width3++; 
-                         elem3.style.width = width3 + '%';
-                           }
-                     
-                       if (width3 == ppmCO2_b) {
-                         elem3.style.width = width3 + '%';
-                     }
-                     }
-                     
-                  </script>
                </div>
                <p>&#9650 <span class="CO2_data">...</span> ppm @ </span> <span class="CO2_data">...</span></p>
                <p>&#9660 <span class="CO2_data">...</span> ppm @ </span> <span class="CO2_data">...</span></p>
@@ -287,15 +207,17 @@
                   <p>&#9835 <span class="CO2_data">...</span></p>
                </small>
             </div>
-            <div class="P_box"style="height:50px;">
+            <div class="boxnew withborder"style="height:50px;">
                <h1>VENTILATION REQUIRED</h1>
                <div style="margin-top:0px;"><span id="OUT_3">...</span></div>
             </div>
          </div>
       </div>
-      </div>  
-      <div class="A_box">
-         <div class="E_box">
+      <!-- Pannello Elettrico-->
+      <div class="elettrico">
+         <h3 style="text-align: left;">Elettrico</h3>
+         <div class="boxnew">
+         <div class="boxnew withborder">
             <div style="margin-top:3px;">
                <h1>ELECTRIC ACTIVE POWER</h1>
             </div>
@@ -304,7 +226,8 @@
             <p>&#9650 <span class="energy_monitor_max_min_data">...</span> W @ <span class="energy_monitor_max_min_data">...</span></p>
             <div style="margin-top:25px;float:center;text-align:center;"><small> &#9835 <span class="energy_monitor_max_min_data">...</span></small></div>
          </div>
-         <div class="N_box" style="height:72px;">
+
+         <div class="boxnew withborder">
             <div style="margin-top:3px;">
                <h1>RMS LINE VOLTAGE</h1>
             </div>
@@ -312,77 +235,104 @@
                <h3><span class="energy_monitor">...</span> V</h3>
             </div>
             <div style="margin-top:15px;"<small>&#9650 <span class="energy_monitor_max_min_data">...</span> V / &#9660 <span class="energy_monitor_max_min_data">...  </span> V</small>
-         </div>
-      </div>
-      <div class="N_box" style="height:50px;">
-         <div style="margin-top:3px;">
-            <h1>RMS LINE CURRENT</h1>
-         </div>
-         <p>
-         <h3><span class="energy_monitor">...</span> A</h3>
-         </p>
-      </div>
-      <div class="N_box" style="height:50px;">
-         <div style="margin-top:8px;">
-            <h1>APPARENT POWER <span class="energy_monitor">...</span> VA</h1>
-         </div>
-         <div style="margin-top:12px;">
-            <h1>POWER FACTOR <span class="energy_monitor">...</span></h1>
-         </div>
-      </div>
-      <div class="N_box" style="height:125px;">
-         <div style="margin-top:3px;">
-            <h1>ENERGY CONSUMPTION</h1>
-         </div>
-         <div style="width:50%;height:25px;float:left;margin-top:10px;">TODAY </div>
-         <div style="width:50%;height:25px;float:left;margin-top:10px;"><span class="energy_monitor">...</span> W/h</div>
-         <div style="width:50%;height:25px;float:left;">LAST HOUR </div>
-         <div style="width:50%;height:25px;float:left;"><span class="energy_monitor">...</span> W/h</div>
-         <div style="width:50%;height:25px;float:left;">YESTERDAY </div>
-         <div style="width:50%;height:25px;float:left;"><span class="energy_monitor">...</span> Kw/h</div>
-         <div style="width:50%;height:25px;float:left;">LAST WEEK </div>
-         <div style="width:50%;height:25px;float:left;"><span class="energy_monitor">...</span> Kw/h</div>
-      </div>
-      </div>
-      <div class="F_box">
-         <div class="I_box" style="height:50px;">
-            <div style="margin-top:1px;">
-               <h1>SERVER ACTIVITY</h1>
-            </div>
-            <div style="margin-top:6px;">
-               <h2><span class="time">...</span></h2>
             </div>
          </div>
-         <div class="I_box" style="height:100px;">
-            <div style="margin-top:1px;">
-               <h1>ENCLOSURE TEMP.</h1>
+         
+         <div class="boxnew withborder">
+            <div style="margin-top:3px;">
+               <h1>RMS LINE CURRENT</h1>
             </div>
-            <div style="margin-top:2px;">
-               <h2><span class="bmp_temp">...</span>�C </h2>
+            <p>
+            <h3><span class="energy_monitor">...</span> A</h3>
+            </p>
+         </div>
+
+         <div class="boxnew withborder">
+            <div style="margin-top:8px;">
+               <h1>APPARENT POWER <span class="energy_monitor">...</span> VA</h1>
             </div>
-            <div style="margin-top:6px;"><span id="OUT_4">...</span></div>
-            <div style="margin-top:12px;float:center;text-align:center;"><small><span class="bmp_temp">...</span></small></div>
+            <div style="margin-top:12px;">
+               <h1>POWER FACTOR <span class="energy_monitor">...</span></h1>
+            </div>
+         </div>
+         <div class="boxnew withborder">
+            <div style="margin-top:3px;">
+               <h1>ENERGY CONSUMPTION</h1>
+            </div>
+            <div class="rainfalltesto">TODAY </div>
+            <div class="rainfalltesto"><span class="energy_monitor">...</span> W/h</div>
+            <div class="rainfalltesto">LAST HOUR </div>
+            <div class="rainfalltesto"><span class="energy_monitor">...</span> W/h</div>
+            <div class="rainfalltesto">YESTERDAY </div>
+            <div class="rainfalltesto"><span class="energy_monitor">...</span> Kw/h</div>
+            <div class="rainfalltesto">LAST WEEK </div>
+            <div class="rainfalltesto"><span class="energy_monitor">...</span> Kw/h</div>
+         </div>
+         </div>
+         </div>
+         <!-- Pannello Server -->
+         <div class="server">
+            <h3 style="text-align: left;">Server</h3>
+            <div class="boxnew">
+               
+            <div class="boxnew withborder">
+               <div style="margin-top:1px;">
+                  <h1>SERVER ACTIVITY</h1>
+               </div>
+               <div style="margin-top:6px;">
+                  <h2><span class="time">...</span></h2>
+               </div>
+            </div>
+            <div class="boxnew withborder">
+               <div style="margin-top:1px;">
+                  <h1>ENCLOSURE TEMP.</h1>
+               </div>
+               <div style="margin-top:2px;">
+                  <h2><span class="bmp_temp">...</span>�C </h2>
+               </div>
+               <div style="margin-top:6px;"><span id="OUT_4">...</span></div>
+               <div style="margin-top:12px;float:center;text-align:center;"><small><span class="bmp_temp">...</span></small></div>
+            </div>
+            <!-- Pulsanti -->
+            <div class="boxnew">
+               <button class= "button" type="button" id="BUZZER_OFF" onclick="GetButtonTacitate()">MUTE ALARM: OFF</button>
+            </div>
+            <div class="boxnew">
+               <button class= "button" type="button" id="RESET" onclick="GetButtonReset()">CLEAR/LOCK  &#9650&#9660 : OFF</button>
+            </div>
+            <div class="boxnew">
+               <button class= "button" type="button" id="OUT_1" onclick="GetButtonOUT1()">SET OUT 1: ON/OFF</button>
+            </div>
+            <div class="boxnew">
+               <button class= "button" type="button" id="OUT_2" onclick="GetButtonOUT2()">SET OUT 2: ON/OFF</button>
+            </div>
+         </div>
          </div>
       </div>
-      <div class="S_box">
+      <!-- Pannello di controllo -->
+      <!--
+      <div class="pannello">
          <div class="I_box">
-            <div><button class= "button" type="button" id="BUZZER_OFF" onclick="GetButtonTacitate()">MUTE ALARM: OFF</button></div>
+            <button class= "button" type="button" id="BUZZER_OFF" onclick="GetButtonTacitate()">MUTE ALARM: OFF</button>
          </div>
          <div class="I_box">
-            <div><button class= "button" type="button" id="RESET" onclick="GetButtonReset()">CLEAR/LOCK  &#9650&#9660 : OFF</button></div>
+            <button class= "button" type="button" id="RESET" onclick="GetButtonReset()">CLEAR/LOCK  &#9650&#9660 : OFF</button>
          </div>
          <div class="I_box">
-            <div><button class= "button" type="button" id="OUT_1" onclick="GetButtonOUT1()">SET OUT 1: ON/OFF</button></div>
+            <button class= "button" type="button" id="OUT_1" onclick="GetButtonOUT1()">SET OUT 1: ON/OFF</button>
          </div>
          <div class="I_box">
-            <div><button class= "button" type="button" id="OUT_2" onclick="GetButtonOUT2()">SET OUT 2: ON/OFF</button></div>
+            <button class= "button" type="button" id="OUT_2" onclick="GetButtonOUT2()">SET OUT 2: ON/OFF</button>
          </div>
-      </div>
+      </div>-->
+   </div>
+
    </body>
    <script src="assets/js/gaugePersonal.js"></script>
+   <script src="assets/js/bar.js"></script>
    <script src="assets/js/giorgio.js"></script>
    <script>
-      gauge1.set(P)           //Barometric Pressure
+      gauge1.set(P/100)           //Barometric Pressure
       gauge2.set(t1)          //IN TEMPERATURE
       gauge3.set(t2)          //OUT TEMPERATURE
       gauge4.set(h1)          //IN HUMIDITY

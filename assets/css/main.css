@@ -1,11 +1,12 @@
 body{
+    /*background-color: #7a8b9d*/
     background-color: #7a8b9d
 }
 
 .A_box{
     float: left;
     width: 210px;
-    height: 600px;
+    /*height: 600px;*/
     text-align:center;
     margin: 2px 0px 2px 2px;
 }
@@ -17,7 +18,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 180px;
-    height: 65px;
+    /*height: 65px;*/
     text-align:center;
     border: 1px solid white;
     line-height: 10px;
@@ -31,7 +32,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 198px;
-    height: 239px;
+    /*height: 239px;*/
     text-align:center;
     line-height: 12px;
 }
@@ -43,14 +44,14 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 424px;
-    height: 586px;
+    /*height: 586px;*/
     text-align:left;
 }    
 
 .D_box{
     float: left;
     width: 208px;
-    height: 630px;
+    /*height: 630px;*/
     margin: 2px 0px 2px 2px;
     font-size: 95%;
 }
@@ -62,7 +63,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 200px;
-    height: 250px;
+    /*height: 250px;*/
     text-align:center;
     font-size: 95%;
     line-height: 10px;
@@ -72,7 +73,7 @@ body{
     float: left;
     margin: 2px;
     width: 170px;
-    height: 595px;
+    /*height: 595px;*/
     margin: 2px 2px 2px 2px;
 }
 
@@ -83,7 +84,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 200px;
-    height: 275px;
+    /*height: 275px;*/
     text-align:center;
     line-height: 10px;
 }
@@ -95,7 +96,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 198px;
-    height: 100px;
+    /*height: 100px;*/
     text-align:center;
     line-height: 12px;
 }	
@@ -107,7 +108,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 160px;
-    height: 50px;
+    /*height: 50px;*/
     text-align:center;
     border: 1px solid white;
     line-height: 20px;
@@ -120,7 +121,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 200px;
-    height: 210px;
+    /*height: 210px;*/
     text-align:center;
     line-height: 12px;
 }  
@@ -132,7 +133,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 200px;
-    text-align:center;
+    text-align: center;
     line-height: 12px;
     font-size: 95%;
 }
@@ -144,7 +145,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 180px;
-    height: 255px;
+    /*height: 255px;*/
     text-align:center;
     line-height: 15px;
 }  
@@ -156,7 +157,7 @@ body{
     border-radius: 2px;
     padding: 2px;
     width: 200px;
-    height: 170px;
+    /*height: 170px;*/
     text-align:center;
     line-height: 15px;
 }  
@@ -166,7 +167,7 @@ body{
     border: 1px solid white;
     border-radius: 2px;
     width: 192px;
-    height: 17px;
+    /*height: 17px;*/
 }
 
 .R_box{
@@ -174,7 +175,7 @@ body{
     border: 1px solid white;
     border-radius: 2px;
     width: 192px;
-    height: 17px;
+    /*height: 17px;*/
 }
 
 .S_box{
@@ -182,7 +183,7 @@ body{
     border: 2px solid white;
     border-radius: 2px;
     width: 800px;
-    height: 200px;
+    /*height: 200px;*/
 }
     
 .button{
@@ -266,4 +267,115 @@ h3{
     height: 15px;
     border-radius: 2px;
     background-color: #4D89F2;
+}
+/* Da qui in poi roba ricontrollata*/
+
+.gaugetext{
+    font-size: large;
+    font-weight: bold;
+}
+
+
+
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    border: 3px solid transparent;
+    border-radius: 2px
+}
+
+.esterno{
+    /*width: 100%;*/
+    margin: 1px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 2px;
+    margin: 2px;
+    padding-right: 6px;
+}
+
+.interno{
+    /*width: 100%;*/
+    margin: 1px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 2px
+}
+
+.elettrico{
+    /*width: 100%;*/
+    margin: 1px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 2px
+}
+
+.server{
+    /*width: 100%;*/
+    margin: 1px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 2px
+}
+
+.pannello{
+    width: 100%;
+    margin: 1px;
+    text-align: center;
+}
+
+.boxnew{
+    float: left;
+    width: 200px;
+    text-align: center;
+    line-height: 12px;
+    font-size: 95%;
+    margin: 2px;
+    padding: 2px;
+}
+
+.loadingbar{
+    margin: 2px;
+    border: 1px solid black;
+    border-radius: 2px;
+    width: 192px;
+    /*height: 17px;*/
+}
+
+.withborder{
+    border: 1px solid black;
+    border-radius: 2px;
+    margin-right: unset;
+    margin-left: unset;
+    padding-right: unset;
+    padding-left: unset;
+    /*box-shadow: 9px 10px 5px -4px rgba(186,186,186,1);*/
+}
+
+.ultimariga{
+    padding-bottom: 5px;
+}
+
+.rainfalltesto{
+    width: 50%;
+    float: left;
+    margin-top: 10px;
+}
+
+.buttonbox{
+    float: left;
+    margin: 2px 2Px 2px 2px;
+    border: 1px solid white;
+    border-radius: 2px;
+    padding: 2px;
+    width: 200px;
+    /*height: 50px;*/
+    text-align:center;
+    border: 1px solid white;
+    line-height: 20px;
+}
+
+h3{
+    padding-left: 5px;
 }

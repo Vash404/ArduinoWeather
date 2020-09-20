@@ -11,7 +11,7 @@ var opts = {
         },
         staticLabels: {
             font: "10px sans-serif",  // Specifies font
-            labels: [0, 52000, 104000],  // Print labels at these values
+            labels: [0, 520, 1040],  // Print labels at these values
             color: "#000000",  // Optional: Label text color
             fractionDigits: 0  // Optional: Numerical precision. 0=round off.
         },
@@ -26,10 +26,10 @@ var opts = {
         };
 var target = document.getElementById('gauge1'); // your canvas element
 var gauge1 = new Gauge(target).setOptions(opts); // create sexy gauge!
-gauge1.maxValue = 3000; // set max gauge value
+gauge1.maxValue = 1040; // set max gauge value
 gauge1.setMinValue(0);  // Prefer setter over gauge.minValue = 0
 gauge1.animationSpeed = 128; // set animation speed (32 is default value)
-gauge1.set(3000); // set actual value
+gauge1.set(300); // set actual value
 gauge1.setTextField(document.getElementById("gauge1text"));
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -48,6 +48,13 @@ var opts = {
         color: "#000000",  // Optional: Label text color
         fractionDigits: 0  // Optional: Numerical precision. 0=round off.
     },*/
+    staticZones: [
+        {strokeStyle: "#F03E3E", min: 0, max: 15}, // Red from 100 to 130
+        {strokeStyle: "#FFDD00", min: 15, max: 18}, // Yellow
+        {strokeStyle: "#30B32D", min: 18, max: 25}, // Green
+        {strokeStyle: "#FFDD00", min: 25, max: 30}, // Yellow
+        {strokeStyle: "#F03E3E", min: 30, max: 35}  // Red
+     ],
 
     limitMax: false,     // If false, max value increases automatically if value > maxValue
     limitMin: false,     // If true, the min value of the gauge will be fixed
@@ -84,6 +91,14 @@ var opts = {
         color: "#000000",  // Optional: Label text color
         fractionDigits: 0  // Optional: Numerical precision. 0=round off.
     },*/
+    staticZones: [
+        {strokeStyle: "#F03E3E", min: 0, max: 15}, // Red from 100 to 130
+        {strokeStyle: "#FFDD00", min: 15, max: 20}, // Yellow
+        {strokeStyle: "#30B32D", min: 20, max: 30}, // Green
+        {strokeStyle: "#FFDD00", min: 30, max: 35}, // Yellow
+        {strokeStyle: "#F03E3E", min: 35, max: 40}  // Red
+     ],
+
 
     limitMax: false,     // If false, max value increases automatically if value > maxValue
     limitMin: false,     // If true, the min value of the gauge will be fixed
@@ -120,6 +135,7 @@ var opts = {
         color: "#000000",  // Optional: Label text color
         fractionDigits: 0  // Optional: Numerical precision. 0=round off.
     },*/
+    
 
     limitMax: false,     // If false, max value increases automatically if value > maxValue
     limitMin: false,     // If true, the min value of the gauge will be fixed
